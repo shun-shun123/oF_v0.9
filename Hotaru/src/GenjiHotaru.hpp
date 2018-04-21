@@ -13,5 +13,9 @@
 
 #endif /* GenjiHotaru_hpp */
 class GenjiHotaru : public Hotaru {
-
+    public :
+    GenjiHotaru();
+        void stop();
+        void fly();
+        void shine();
 };

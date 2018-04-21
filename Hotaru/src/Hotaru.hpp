@@ -18,6 +18,9 @@ class Hotaru {
         void move();
         void update();
     protected :
+        void stop();
+        void fly();
+        void shine();
         ofImage hotaru[4];
         ofVec2f pos, vel;
         float yRatio[3];

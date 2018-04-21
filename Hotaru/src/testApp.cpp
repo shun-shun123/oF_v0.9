@@ -3,9 +3,10 @@
 //--------------------------------------------------------------
 void testApp::setup() {
     ofBackground(0);
-    ofSetBackgroundAuto(false);
     ofToggleFullscreen();
-
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    
+    sample.load("hotaru.png");
 }
 
 //--------------------------------------------------------------
@@ -17,14 +18,47 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    ofPushStyle();
-    ofSetColor(0, 50);
-    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
-    ofPopStyle();
-    for (int i = 0; i < HOTARU_NUM; i++) {
-        hotaru[i].move();
-    }
+//    for (int i = 0; i < HOTARU_NUM; i++) {
+//        hotaru[i].move();
+//    }
+    sample.draw(0, 0);
+    Environment env = Environment();
+    env.setSeason();
 }
+
+//--------------------------------------------------------------
+void testApp::setBrightness(ofImage image, const int brightness) {
+    int numChannels;
+    
+    switch (image.getImageType()) {
+        case OF_IMAGE_GRAYSCALE:
+            numChannels = 1;
+            break;
+        case OF_IMAGE_COLOR:
+            numChannels = 2;
+            break;
+        case OF_IMAGE_COLOR_ALPHA:
+            numChannels = 3;
+            break;
+        default:
+            numChannels = -1;
+            break;
+    }
+    ofPixels &pix = image.getPixels();
+    const size_t pixSize = static_cast<size_t>(image.getWidth() * image.getHeight() * numChannels);
+    
+    for (size_t i=0; i<pixSize; i+=numChannels) {
+        
+        const int r = pix[i] + brightness;
+        const int g = pix[i+1] + brightness;
+        const int b = pix[i+2] + brightness;
+        pix[i] = static_cast<unsigned char>(r < 0 ? 0 : r > 255 ? 255 : r);
+        pix[i+1] = static_cast<unsigned char>(g < 0 ? 0 : g > 255 ? 255 : g);
+        pix[i+2] = static_cast<unsigned char>(b < 0 ? 0 : b > 255 ? 255 : b);
+    }
+    
+}
+
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){

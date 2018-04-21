@@ -4,6 +4,7 @@
 #include "ofxOpenNI.h"
 #include "ofMain.h"
 #include "GenjiHotaru.hpp"
+#include "Environment.hpp"
 
 #define HOTARU_NUM 10
 #define STATE 5
@@ -24,7 +25,9 @@ public:
 	void mouseReleased(int x, int y, int button);
 	void windowResized(int w, int h);
     
+    void setBrightness(ofImage image, const int brightness);
     Hotaru hotaru[HOTARU_NUM];
+    ofImage sample;
 };
 
 #endif

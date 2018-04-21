@@ -6,3 +6,12 @@
 //
 
 #include "GenjiHotaru.hpp"
+
+GenjiHotaru::GenjiHotaru() : Hotaru() {
+    // Todo コンストラクタ
+}
+
+void GenjiHotaru::stop() {
+    // 現在地から一定の距離未満で止まる場所を探す
+    
+}
