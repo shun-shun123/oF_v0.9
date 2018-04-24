@@ -26,8 +26,9 @@ public:
 	void windowResized(int w, int h);
     
     void setBrightness(ofImage image, const int brightness);
-    Hotaru hotaru[HOTARU_NUM];
+    Hotaru hotaru;
     ofImage sample;
+    bool hoge = false;
 };
 
 #endif

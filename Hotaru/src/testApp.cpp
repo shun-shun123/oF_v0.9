@@ -1,19 +1,23 @@
 #include "testApp.h"
-
+float brightness = 0;
+ofColor color;
 //--------------------------------------------------------------
 void testApp::setup() {
     ofBackground(0);
     ofToggleFullscreen();
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     
-    sample.load("hotaru.png");
+    sample.load("sample.png");
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    for (int i = 0; i < HOTARU_NUM; i++) {
-        hotaru[i].update();
-    }
+    if (brightness >= 255) brightness = 0;
+    brightness++;
+    setBrightness(sample, brightness);
+    color = ofColor::fromHsb(150, 255, brightness);
+    hotaru.update();
+    hotaru.setPan(ofMap(hotaru.pos.x, 0, ofGetWidth(), -1, 1));
 }
 
 //--------------------------------------------------------------
@@ -21,9 +25,8 @@ void testApp::draw(){
 //    for (int i = 0; i < HOTARU_NUM; i++) {
 //        hotaru[i].move();
 //    }
-    sample.draw(0, 0);
-    Environment env = Environment();
-    env.setSeason();
+    sample.draw(ofGetWidth() / 2, ofGetHeight() / 2);
+    hotaru.move();
 }
 
 //--------------------------------------------------------------
@@ -37,7 +40,7 @@ void testApp::setBrightness(ofImage image, const int brightness) {
         case OF_IMAGE_COLOR:
             numChannels = 2;
             break;
-        case OF_IMAGE_COLOR_ALPHA:
+        case OF_IMAGE_COLOR_ALPHA: // これになるはず
             numChannels = 3;
             break;
         default:
@@ -45,10 +48,11 @@ void testApp::setBrightness(ofImage image, const int brightness) {
             break;
     }
     ofPixels &pix = image.getPixels();
+    
+    // pixSize == 5547
     const size_t pixSize = static_cast<size_t>(image.getWidth() * image.getHeight() * numChannels);
     
-    for (size_t i=0; i<pixSize; i+=numChannels) {
-        
+    for (size_t i = 0; i < pixSize; i += numChannels) {
         const int r = pix[i] + brightness;
         const int g = pix[i+1] + brightness;
         const int b = pix[i+2] + brightness;
@@ -56,13 +60,13 @@ void testApp::setBrightness(ofImage image, const int brightness) {
         pix[i+1] = static_cast<unsigned char>(g < 0 ? 0 : g > 255 ? 255 : g);
         pix[i+2] = static_cast<unsigned char>(b < 0 ? 0 : b > 255 ? 255 : b);
     }
-    
+    image.update();
 }
 
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-
+    hotaru.cry();
 }
 
 //--------------------------------------------------------------

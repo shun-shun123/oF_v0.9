@@ -19,6 +19,8 @@ Hotaru::Hotaru() {
     spark[0] = ofRandom(500, 1000);
     spark[1] = ofRandom(1000, 1400);
     spark[2] = ofRandom(1000, 1600);
+    sound.load("鈴虫の音.mp3");
+    sound.setVolume(0.4);
 }
 
 void Hotaru::update() {
@@ -56,4 +58,12 @@ void Hotaru::move() {
             hotaru[i].draw(pos);
         }
     }
+}
+
+void Hotaru::cry() {
+    sound.play();
+}
+
+void Hotaru::setPan(float pan) {
+    sound.setPan(pan);
 }

@@ -17,12 +17,11 @@ class Hotaru {
         Hotaru();
         void move();
         void update();
-    protected :
-        void stop();
-        void fly();
-        void shine();
+        void cry();
         ofImage hotaru[4];
         ofVec2f pos, vel;
         float yRatio[3];
         float spark[3];
+    ofSoundPlayer sound;
+    void setPan(float pan);
 };

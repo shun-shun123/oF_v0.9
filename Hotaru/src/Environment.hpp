@@ -23,4 +23,8 @@ class Environment {
         void autumn();
         void winter();
         ofArduino arduino;
+    struct particle {
+        ofVec2f position;
+        ofColor color;
+    };
 };

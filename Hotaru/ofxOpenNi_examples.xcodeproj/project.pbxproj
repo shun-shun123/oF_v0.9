@@ -11,7 +11,6 @@
 		89D91BBAE9596D6E30AA6E35 /* ofxOpenNI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12B3CD0D48AD549F971EB586 /* ofxOpenNI.cpp */; };
 		900AA84D208B7A90000DB9D4 /* Environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 900AA84B208B7A90000DB9D4 /* Environment.cpp */; };
 		901B53412083AC80003D4005 /* Hotaru.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 901B533F2083AC80003D4005 /* Hotaru.cpp */; };
-		901B53442083ACE9003D4005 /* GenjiHotaru.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 901B53422083ACE9003D4005 /* GenjiHotaru.cpp */; };
 		B60B93F71C6A91B400E48A8A /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B60B93F51C6A91B400E48A8A /* testApp.cpp */; };
 		B60B94061C6A922F00E48A8A /* libnimCodecs.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B60B93F81C6A922F00E48A8A /* libnimCodecs.dylib */; };
 		B60B94071C6A922F00E48A8A /* libnimMockNodes.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B60B93F91C6A922F00E48A8A /* libnimMockNodes.dylib */; };
@@ -133,8 +132,6 @@
 		900AA84C208B7A90000DB9D4 /* Environment.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Environment.hpp; sourceTree = "<group>"; };
 		901B533F2083AC80003D4005 /* Hotaru.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Hotaru.cpp; sourceTree = "<group>"; };
 		901B53402083AC80003D4005 /* Hotaru.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Hotaru.hpp; sourceTree = "<group>"; };
-		901B53422083ACE9003D4005 /* GenjiHotaru.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GenjiHotaru.cpp; sourceTree = "<group>"; };
-		901B53432083ACE9003D4005 /* GenjiHotaru.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GenjiHotaru.hpp; sourceTree = "<group>"; };
 		92AEAB898510CC9ED018BF93 /* XnCodecIDs.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = XnCodecIDs.h; path = ../../../addons/ofxOpenNI/libs/include/openni/XnCodecIDs.h; sourceTree = SOURCE_ROOT; };
 		92E53D58815AD8B9D2DD8866 /* XnVMultiProcessFlowServer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = XnVMultiProcessFlowServer.h; path = ../../../addons/ofxOpenNI/libs/include/nite/XnVMultiProcessFlowServer.h; sourceTree = SOURCE_ROOT; };
 		948D52B877B9516F5A481D66 /* XnScheduler.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = XnScheduler.h; path = ../../../addons/ofxOpenNI/libs/include/openni/XnScheduler.h; sourceTree = SOURCE_ROOT; };
@@ -506,8 +503,6 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				901B533F2083AC80003D4005 /* Hotaru.cpp */,
 				901B53402083AC80003D4005 /* Hotaru.hpp */,
-				901B53422083ACE9003D4005 /* GenjiHotaru.cpp */,
-				901B53432083ACE9003D4005 /* GenjiHotaru.hpp */,
 				900AA84B208B7A90000DB9D4 /* Environment.cpp */,
 				900AA84C208B7A90000DB9D4 /* Environment.hpp */,
 			);
@@ -628,7 +623,6 @@
 				901B53412083AC80003D4005 /* Hotaru.cpp in Sources */,
 				B60B93F71C6A91B400E48A8A /* testApp.cpp in Sources */,
 				89D91BBAE9596D6E30AA6E35 /* ofxOpenNI.cpp in Sources */,
-				901B53442083ACE9003D4005 /* GenjiHotaru.cpp in Sources */,
 				53B8DC1D45EBD5267B24B601 /* ofxOpenNITypes.cpp in Sources */,
 				900AA84D208B7A90000DB9D4 /* Environment.cpp in Sources */,
 			);
