@@ -21,6 +21,7 @@ Hotaru::Hotaru() {
     spark[2] = ofRandom(1000, 1600);
     sound.load("鈴虫の音.mp3");
     sound.setVolume(0.4);
+    sound.setLoop(true);
 }
 
 void Hotaru::update() {

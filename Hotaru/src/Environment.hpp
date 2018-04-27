@@ -12,19 +12,25 @@
 #include "ofMain.h"
 
 #endif /* Environment_hpp */
+
+//#define PARTICLE_NUM = 100
+
 class Environment {
     public :
         Environment();
         void setSeason();
     private :
         float arduinoTemparature();
-        void spring();
-        void summer();
-        void autumn();
-        void winter();
+        float convertAnalogToDigital(int analog);
+        float calcTemparature(int analog);
+        void updateFall();
+        ofColor getSeason();
         ofArduino arduino;
-    struct particle {
-        ofVec2f position;
-        ofColor color;
-    };
+        struct Particle {
+            float size;
+            ofVec2f pos;
+            ofVec2f vel;
+        };
+        static const int PARTICLE_NUM = 15;
+        Particle particles[PARTICLE_NUM];
 };

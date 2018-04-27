@@ -27,6 +27,8 @@ public:
     
     void setBrightness(ofImage image, const int brightness);
     Hotaru hotaru;
+    Hotaru akimusi;
+    Environment season;
     ofImage sample;
     bool hoge = false;
 };

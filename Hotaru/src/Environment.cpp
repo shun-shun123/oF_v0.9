@@ -9,45 +9,68 @@
 
 Environment::Environment() {
     arduino.connect("/dev/cu.usbmodem14311", 57600);
-    arduino.sendDigitalPinMode(10, ARD_OUTPUT);
+    ofToggleFullscreen();
+    for (int i = 0; i < PARTICLE_NUM; i++) {
+        particles[i] = {ofRandom(3, 7), ofVec2f(ofRandom(0, ofGetWidth()), ofRandom(0, ofGetHeight())), ofVec2f(ofRandom(-2, 2), ofRandom(1, 3))};
+    }
 }
 
 void Environment::setSeason() {
-    // Todo シーズンを描画する関数を選択する
-    float temparature = arduinoTemparature();
-    if (temparature <= 30 && temparature >= 20) {
-        spring();
-    } else if (temparature > 30) {
-        summer();
-    } else if (temparature < 20 && temparature >= 10) {
-        autumn();
-    } else {
-        winter();
+    ofPushStyle();
+    ofSetColor(getSeason());
+    updateFall();
+    for (int i = 0; i < PARTICLE_NUM; i++) {
+        ofDrawCircle(particles[i].pos, particles[i].size);
     }
+    ofPopStyle();
 }
 
 float Environment::arduinoTemparature() {
     arduino.update();
-    float digital = arduino.getAnalog(0);
+    int analog = arduino.getAnalog(0);
+    float temparature = calcTemparature(analog);
+    return temparature;
+}
+
+float Environment::convertAnalogToDigital(int analog) {
+    float digital = analog * (5.0 / 1023.0);
     return digital;
 }
 
-void Environment::spring() {
-    ofSetColor(ofColor::fromHsb(100, 255, 255, 100));
-    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+float Environment::calcTemparature(int analog) {
+    float digital = convertAnalogToDigital(analog);
+    float temparature = digital * 100;
+    
+    // temparatureの上限下限を設定する処理
+    if (temparature < -10) {
+        temparature = 10;
+    }
+    if (temparature > 50) {
+        temparature = 50;
+    }
+    
+    return temparature;
 }
 
-void Environment::summer() {
-    ofSetColor(ofColor::fromHsb(150, 255, 255, 100));
-    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+ofColor Environment::getSeason() {
+    float hue = ofMap(arduinoTemparature(), -10, 50, 40, 170);
+    ofColor color = ofColor::fromHsb(hue, 255, 255);
+    ofDrawBitmapString(hue, 50, 50);
+    ofDrawBitmapString(ofGetFrameRate(), 50, 100);
+    return color;
 }
 
-void Environment::autumn() {
-    ofSetColor(ofColor::fromHsb(200, 255, 255, 100));
-    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
-}
-
-void Environment::winter() {
-    ofSetColor(ofColor::fromHsb(255, 255, 255, 100));
-    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+void Environment::updateFall() {
+    for (int i = 0; i < PARTICLE_NUM; i++) {
+        particles[i].pos += particles[i].vel;
+        if (particles[i].pos.x < 0) {
+            particles[i].pos.x = ofGetWidth();
+        }
+        if (particles[i].pos.x > ofGetWidth()) {
+            particles[i].pos.x = 0;
+        }
+        if (particles[i].pos.y > ofGetHeight()) {
+            particles[i].pos.y = 0;
+        }
+    }
 }

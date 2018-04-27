@@ -4,10 +4,12 @@ ofColor color;
 //--------------------------------------------------------------
 void testApp::setup() {
     ofBackground(0);
-    ofToggleFullscreen();
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     
     sample.load("sample.png");
+    akimusi.sound.load("秋の夜の虫の音.mp3");
+    hotaru.cry();
+    akimusi.cry();
 }
 
 //--------------------------------------------------------------
@@ -18,6 +20,10 @@ void testApp::update(){
     color = ofColor::fromHsb(150, 255, brightness);
     hotaru.update();
     hotaru.setPan(ofMap(hotaru.pos.x, 0, ofGetWidth(), -1, 1));
+    hotaru.sound.setVolume(pow(ofNoise(ofGetElapsedTimeMillis()), 4));
+    akimusi.update();
+    akimusi.setPan(ofMap(hotaru.pos.x, 0, ofGetWidth(), -1, 1));
+    akimusi.sound.setVolume(pow(ofNoise(ofGetElapsedTimeMillis()), 6));
 }
 
 //--------------------------------------------------------------
@@ -27,6 +33,8 @@ void testApp::draw(){
 //    }
     sample.draw(ofGetWidth() / 2, ofGetHeight() / 2);
     hotaru.move();
+    akimusi.move();
+    season.setSeason();
 }
 
 //--------------------------------------------------------------
@@ -67,6 +75,7 @@ void testApp::setBrightness(ofImage image, const int brightness) {
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     hotaru.cry();
+    akimusi.cry();
 }
 
 //--------------------------------------------------------------
