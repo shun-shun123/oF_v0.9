@@ -7,6 +7,9 @@
 
 #include "Environment.hpp"
 
+#define MIN_TEMPARATURE 20
+#define MAX_TEMPARATURE 30
+
 Environment::Environment() {
     arduino.connect("/dev/cu.usbmodem14311", 57600);
     ofToggleFullscreen();
@@ -46,18 +49,18 @@ float Environment::calcTemparature(int analog) {
     float temparature = digital * 100;
     
     // temparatureの上限下限を設定する処理
-    if (temparature < -10) {
-        temparature = 10;
+    if (temparature < MIN_TEMPARATURE) {
+        temparature = MIN_TEMPARATURE;
     }
-    if (temparature > 50) {
-        temparature = 50;
+    if (temparature > MAX_TEMPARATURE) {
+        temparature = MAX_TEMPARATURE;
     }
     
     return temparature;
 }
 
 ofFloatColor* Environment::getSeason() {
-    float hue = ofMap(arduinoTemparature(), -10, 50, 40.0 / 255.0, 170.0 / 255.0);
+    float hue = ofMap(arduinoTemparature(), MIN_TEMPARATURE, MAX_TEMPARATURE, 40.0 / 255.0, 170.0 / 255.0);
     for (int i = 0; i < PARTICLE_NUM; i++) {
         particleColor[i] = ofFloatColor::fromHsb(hue, 1.0, 1.0);
     }
