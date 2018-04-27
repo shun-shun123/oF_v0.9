@@ -11,18 +11,22 @@ Environment::Environment() {
     arduino.connect("/dev/cu.usbmodem14311", 57600);
     ofToggleFullscreen();
     for (int i = 0; i < PARTICLE_NUM; i++) {
-        particles[i] = {ofRandom(3, 7), ofVec2f(ofRandom(0, ofGetWidth()), ofRandom(0, ofGetHeight())), ofVec2f(ofRandom(-2, 2), ofRandom(1, 3))};
+        particleSize[i] = ofRandom(3, 5);
+        particlePos[i] = ofVec2f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()));
+        particleVel[i] = ofVec2f(ofRandom(-3, 3), ofRandom(1, 3));
+        particleColor[i].setHsb(0.5, 1.0, 1.0);
     }
+    particleVbo.setVertexData(particlePos, PARTICLE_NUM, GL_DYNAMIC_DRAW);
+    particleVbo.setColorData(particleColor, PARTICLE_NUM, GL_DYNAMIC_DRAW);
+    glPointSize(4.0);
 }
 
 void Environment::setSeason() {
     ofPushStyle();
-    ofSetColor(getSeason());
     updateFall();
-    for (int i = 0; i < PARTICLE_NUM; i++) {
-        ofDrawCircle(particles[i].pos, particles[i].size);
-    }
+    particleVbo.draw(GL_POINTS, 0, PARTICLE_NUM);
     ofPopStyle();
+    ofDrawBitmapString(ofGetFrameRate(), 50, 100);
 }
 
 float Environment::arduinoTemparature() {
@@ -52,25 +56,28 @@ float Environment::calcTemparature(int analog) {
     return temparature;
 }
 
-ofColor Environment::getSeason() {
-    float hue = ofMap(arduinoTemparature(), -10, 50, 40, 170);
-    ofColor color = ofColor::fromHsb(hue, 255, 255);
-    ofDrawBitmapString(hue, 50, 50);
-    ofDrawBitmapString(ofGetFrameRate(), 50, 100);
-    return color;
+ofFloatColor* Environment::getSeason() {
+    float hue = ofMap(arduinoTemparature(), -10, 50, 40.0 / 255.0, 170.0 / 255.0);
+    for (int i = 0; i < PARTICLE_NUM; i++) {
+        particleColor[i] = ofFloatColor::fromHsb(hue, 1.0, 1.0);
+    }
+    return particleColor;
 }
 
 void Environment::updateFall() {
     for (int i = 0; i < PARTICLE_NUM; i++) {
-        particles[i].pos += particles[i].vel;
-        if (particles[i].pos.x < 0) {
-            particles[i].pos.x = ofGetWidth();
-        }
-        if (particles[i].pos.x > ofGetWidth()) {
-            particles[i].pos.x = 0;
-        }
-        if (particles[i].pos.y > ofGetHeight()) {
-            particles[i].pos.y = 0;
+        particlePos[i] += particleVel[i];
+//        if (particlePos[i].x < 0) {
+//            particlePos[i].x = ofGetWidth();
+//        }
+//        if (particlePos[i].x > ofGetWidth()) {
+//            particlePos[i].x = 0;
+//        }
+        if (particlePos[i].y > ofGetHeight()) {
+            particlePos[i].y = 0;
         }
     }
+    particleVbo.updateVertexData(particlePos, PARTICLE_NUM);
+    particleVbo.updateColorData(getSeason(), PARTICLE_NUM);
+    ofDrawBitmapString(particleColor[0].getHue(), 50, 50);
 }

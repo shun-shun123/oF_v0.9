@@ -24,13 +24,12 @@ class Environment {
         float convertAnalogToDigital(int analog);
         float calcTemparature(int analog);
         void updateFall();
-        ofColor getSeason();
+        ofFloatColor* getSeason();
         ofArduino arduino;
-        struct Particle {
-            float size;
-            ofVec2f pos;
-            ofVec2f vel;
-        };
-        static const int PARTICLE_NUM = 15;
-        Particle particles[PARTICLE_NUM];
+        static const int PARTICLE_NUM = 50;
+        float particleSize[PARTICLE_NUM];
+        ofVec2f particlePos[PARTICLE_NUM];
+        ofVec2f particleVel[PARTICLE_NUM];
+        ofFloatColor particleColor[PARTICLE_NUM];
+        ofVbo particleVbo;
 };
