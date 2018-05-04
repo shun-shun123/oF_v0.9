@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxPostGlitch.h"
+#include "Box.hpp"
 #define NUM 30
 
 class ofApp : public ofBaseApp{
@@ -22,11 +23,13 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    
+    void connectBoxes(Box box[NUM]);
 		
     ofFbo myFbo;
     ofxPostGlitch myGlitch;
-    ofVec3f position;
-    ofBoxPrimitive box[NUM];
     ofCamera camera;
+    Box box[NUM];
+    int target = 0;
     ofVec3f middle;
 };
