@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "ofxPostGlitch.h"
 #include "Box.hpp"
+#include "Hotaru.hpp"
+
 #define NUM 30
 
 class ofApp : public ofBaseApp{
@@ -30,6 +32,6 @@ class ofApp : public ofBaseApp{
     ofxPostGlitch myGlitch;
     ofCamera camera;
     Box box[NUM];
-    int target = 0;
     ofVec3f middle;
+    Hotaru hotaru;
 };

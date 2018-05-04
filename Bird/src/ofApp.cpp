@@ -4,6 +4,7 @@
 void ofApp::setup(){
     ofBackground(0);
     ofSetVerticalSync(true);
+    ofSetDepthTest(true);
     
     myFbo.allocate(ofGetWidth(), ofGetHeight());
     myGlitch.setup(&myFbo);
@@ -20,16 +21,14 @@ void ofApp::setup(){
 void ofApp::update(){
     myFbo.begin();
     ofClear(0, 0, 0, 255);
-    camera.setPosition(box[target].getPosition());
+    camera.setPosition(hotaru.getPosition());
     camera.lookAt(middle);
     camera.begin();
     connectBoxes(box);
     for (int i = 0; i < NUM; i++) {
-        if (i == target) {
-            continue;
-        }
         box[i].set();
     }
+    hotaru.move();
     camera.end();
     myFbo.end();
 }
@@ -51,10 +50,7 @@ void ofApp::connectBoxes(Box box[NUM]) {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    switch (key) {
-        case 'r' :
-            target = (int)ofRandom(NUM);
-    }
+
 }
 
 //--------------------------------------------------------------

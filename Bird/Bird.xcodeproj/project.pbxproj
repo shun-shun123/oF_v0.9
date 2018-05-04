@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		90EF262F209C2BB1003A28C7 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90EF262D209C2BB1003A28C7 /* Box.cpp */; };
+		90EF2632209C31BF003A28C7 /* Hotaru.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90EF2630209C31BF003A28C7 /* Hotaru.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
 		E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */; };
@@ -48,6 +49,8 @@
 		67DBED026597C0EE427F0379 /* ofxPostGlitch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxPostGlitch.h; path = ../../../addons/ofxPostGlitch/src/ofxPostGlitch.h; sourceTree = SOURCE_ROOT; };
 		90EF262D209C2BB1003A28C7 /* Box.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
 		90EF262E209C2BB1003A28C7 /* Box.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Box.hpp; sourceTree = "<group>"; };
+		90EF2630209C31BF003A28C7 /* Hotaru.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Hotaru.cpp; sourceTree = "<group>"; };
+		90EF2631209C31BF003A28C7 /* Hotaru.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Hotaru.hpp; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E4B69B5B0A3A1756003C02F2 /* BirdDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirdDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
@@ -131,6 +134,8 @@
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				90EF262D209C2BB1003A28C7 /* Box.cpp */,
 				90EF262E209C2BB1003A28C7 /* Box.hpp */,
+				90EF2630209C31BF003A28C7 /* Hotaru.cpp */,
+				90EF2631209C31BF003A28C7 /* Hotaru.hpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -232,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				90EF2632209C31BF003A28C7 /* Hotaru.cpp in Sources */,
 				90EF262F209C2BB1003A28C7 /* Box.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				F6E7D6C01B3F2E112EB0533D /* ofxPostGlitch.cpp in Sources */,
