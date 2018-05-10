@@ -11,7 +11,7 @@ Box::Box() {
     int halfWidth = ofGetWidth() / 2;
     this->position = ofVec3f(ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth * 2, 0));
     this->size = ofRandom(30, 100);
-    this->color = ofColor::fromHsb(ofRandom(255), 255, ofRandom(100, 255));
+    this->color = ofColor::fromHsb(ofRandom(255), 255, 255);
     box.setPosition(this->position);
     box.set(this->size);
 }

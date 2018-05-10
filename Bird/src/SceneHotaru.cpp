@@ -16,6 +16,8 @@ void SceneHotaru::setup() {
     myGlitch.setup(&myFbo);
     myGlitch.setFx(OFXPOSTGLITCH_GLOW, true);
     
+    hotaru.push_back(Hotaru());
+    
     for (int i = 0; i < NUM; i++) {
         box.push_back(Box());
         middle += box[i].getPosition();
@@ -30,11 +32,11 @@ void SceneHotaru::update() {
     switch (state) {
         case 0 :
             camera.setPosition(box[index].getPosition());
-            camera.lookAt(hotaru.getPosition());
+            camera.lookAt(hotaru[0].getPosition());
             break;
         case 1 :
-            camera.setPosition(hotaru.getPosition());
-            camera.lookAt(hotaru.getVelocity() * 2.0);
+            camera.setPosition(hotaru[0].getPosition());
+            camera.lookAt(hotaru[0].getVelocity() * 2.0);
             break;
         case 2 :
             camera.setPosition(0, ofGetWidth() * 2, ofGetWidth());
@@ -50,10 +52,12 @@ void SceneHotaru::update() {
         box[i].connect(box, i);
         box[i].draw();
     }
-    hotaru.move(state);
+    for (int i = 0; i < hotaru.size(); i++) {
+        hotaru[i].move(state);
+    }
     camera.end();
     myFbo.end();
-    hotaru.hitBox(box, hotaru.getPosition());
+    hotaru[0].hitBox(box, hotaru);
 }
 
 void SceneHotaru::draw() {

@@ -11,6 +11,13 @@ Hotaru::Hotaru() {
     
     this->position = ofVec3f(ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth * 2, 0));
     this->velocity = ofVec3f(ofRandom(-5.0, 5.0), ofRandom(-5.0, 5.0), ofRandom(-5.0, 5.0));
+    this->size = 50;
+}
+
+Hotaru::Hotaru(int _size) {
+    this->position = ofVec3f(ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth * 2, 0));
+    this->velocity = ofVec3f(ofRandom(-5.0, 5.0), ofRandom(-5.0, 5.0), ofRandom(-5.0, 5.0));
+    this->size = _size;
 }
 
 void Hotaru::applyForce(ofVec3f force) {
@@ -22,17 +29,19 @@ void Hotaru::move(int state) {
     position += velocity;
     hotaru.setPosition(position);
     if (state != 1) {
-        hotaru.set(100, 30);
+        hotaru.set(size, 30);
         hotaru.draw();
     }
 }
 
-void Hotaru::hitBox(vector<Box>& box, ofVec3f _position) {
-    for (int i = 0; i < box.size(); i++) {
-        if (_position.distance(box[i].getPosition()) <= box[i].getSize() + 50) {
-            box.erase(box.begin() + i);
-            cout << "Box size" << box.size() << endl;
-            break;
+void Hotaru::hitBox(vector<Box>& box, vector<Hotaru>& hotaru) {
+    for (int i = 0; i < hotaru.size(); i++) {
+        for (int j = 0; j < box.size(); j++) {
+            if (hotaru[i].getPosition().distance(box[j].getPosition()) <= box[j].getSize() + hotaru[i].getSize()) {
+                box.erase(box.begin() + j);
+                hotaru.push_back(Hotaru(ofRandom(30, 50)));
+                break;
+            }
         }
     }
 }
@@ -57,4 +66,8 @@ ofVec3f Hotaru::getPosition() {
 
 ofVec3f Hotaru::getVelocity() {
     return this->velocity;
+}
+
+int Hotaru::getSize() {
+    return this->size;
 }

@@ -28,7 +28,7 @@ class SceneHotaru : public ofBaseApp {
         ofxPostGlitch myGlitch;
         ofCamera camera;
         vector<Box> box;
-        Hotaru hotaru;
+        vector<Hotaru> hotaru;
         int state = 1;
         int index = 0;
         ofVec3f force;

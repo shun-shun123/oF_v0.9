@@ -17,11 +17,13 @@
 class Hotaru {
     public :
         Hotaru();
+        Hotaru(int _size);
         void move(int state);
         ofVec3f getPosition();
         ofVec3f getVelocity();
+        int getSize();
         void applyForce(ofVec3f force);
-        void hitBox(vector<Box>& box, ofVec3f _position);
+        void hitBox(vector<Box>& box, vector<Hotaru>& hotaru);
     
     private :
         int halfWidth = ofGetWidth() / 2;
@@ -32,4 +34,5 @@ class Hotaru {
         ofVec3f separate;
         ofVec3f alignForce;
         ofVec3f distance;
+        int size;
 };
