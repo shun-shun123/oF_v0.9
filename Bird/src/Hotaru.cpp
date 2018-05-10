@@ -8,30 +8,53 @@
 #include "Hotaru.hpp"
 
 Hotaru::Hotaru() {
-    position = ofVec3f(ofRandomWidth(), ofRandomHeight(), -ofRandomWidth());
-    velocity = ofVec3f(ofRandom(-5, 5), ofRandom(-5, 5), ofRandom(-5, 5));
+    
+    this->position = ofVec3f(ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth * 2, 0));
+    this->velocity = ofVec3f(ofRandom(-5.0, 5.0), ofRandom(-5.0, 5.0), ofRandom(-5.0, 5.0));
 }
 
-void Hotaru::move() {
+void Hotaru::applyForce(ofVec3f force) {
+    velocity += force;
+}
+
+void Hotaru::move(int state) {
     bound(position);
     position += velocity;
     hotaru.setPosition(position);
-//    hotaru.set(100, 30);
-//    hotaru.drawWireframe();
+    if (state != 1) {
+        hotaru.set(100, 30);
+        hotaru.draw();
+    }
 }
 
+void Hotaru::hitBox(vector<Box>& box, ofVec3f _position) {
+    for (int i = 0; i < box.size(); i++) {
+        if (_position.distance(box[i].getPosition()) <= box[i].getSize() + 50) {
+            box.erase(box.begin() + i);
+            cout << "Box size" << box.size() << endl;
+            break;
+        }
+    }
+}
+
+
 void Hotaru::bound(ofVec3f position) {
-    if (position.x < 0 || position.x > ofGetWidth() * 2) {
-        velocity.x *= -1;
+    int halfWidth = ofGetWidth() / 2;
+    if (position.x <= -halfWidth || position.x >= halfWidth) {
+        velocity.x *= -1.0;
     }
-    if (position.y < 0 || position.y > ofGetHeight() * 2) {
-        velocity.y *= -1;
+    if (position.y <= -halfWidth || position.y >= halfWidth) {
+        velocity.y *= -1.0;
     }
-    if (position.z > ofGetWidth() * 2 || position.z < 0) {
-        velocity.z *= -1;
+    if (position.z >= 0 || position.z <= -halfWidth * 2) {
+        velocity.z *= -1.0;
     }
 }
 
 ofVec3f Hotaru::getPosition() {
     return this->position;
+}
+
+ofVec3f Hotaru::getVelocity() {
+    return this->velocity;
 }

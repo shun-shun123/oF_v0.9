@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9004DB3F20A27B6F00F29F2F /* SceneHotaru.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9004DB3D20A27B6F00F29F2F /* SceneHotaru.cpp */; };
 		90EF262F209C2BB1003A28C7 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90EF262D209C2BB1003A28C7 /* Box.cpp */; };
 		90EF2632209C31BF003A28C7 /* Hotaru.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90EF2630209C31BF003A28C7 /* Hotaru.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
@@ -47,6 +48,8 @@
 /* Begin PBXFileReference section */
 		40C409F696FE990F95E1B9D3 /* ofxPostGlitch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxPostGlitch.cpp; path = ../../../addons/ofxPostGlitch/src/ofxPostGlitch.cpp; sourceTree = SOURCE_ROOT; };
 		67DBED026597C0EE427F0379 /* ofxPostGlitch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxPostGlitch.h; path = ../../../addons/ofxPostGlitch/src/ofxPostGlitch.h; sourceTree = SOURCE_ROOT; };
+		9004DB3D20A27B6F00F29F2F /* SceneHotaru.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneHotaru.cpp; sourceTree = "<group>"; };
+		9004DB3E20A27B6F00F29F2F /* SceneHotaru.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneHotaru.hpp; sourceTree = "<group>"; };
 		90EF262D209C2BB1003A28C7 /* Box.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
 		90EF262E209C2BB1003A28C7 /* Box.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Box.hpp; sourceTree = "<group>"; };
 		90EF2630209C31BF003A28C7 /* Hotaru.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Hotaru.cpp; sourceTree = "<group>"; };
@@ -136,6 +139,8 @@
 				90EF262E209C2BB1003A28C7 /* Box.hpp */,
 				90EF2630209C31BF003A28C7 /* Hotaru.cpp */,
 				90EF2631209C31BF003A28C7 /* Hotaru.hpp */,
+				9004DB3D20A27B6F00F29F2F /* SceneHotaru.cpp */,
+				9004DB3E20A27B6F00F29F2F /* SceneHotaru.hpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -239,6 +244,7 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				90EF2632209C31BF003A28C7 /* Hotaru.cpp in Sources */,
 				90EF262F209C2BB1003A28C7 /* Box.cpp in Sources */,
+				9004DB3F20A27B6F00F29F2F /* SceneHotaru.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				F6E7D6C01B3F2E112EB0533D /* ofxPostGlitch.cpp in Sources */,
 			);

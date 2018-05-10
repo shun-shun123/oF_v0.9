@@ -1,11 +1,10 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxPostGlitch.h"
-#include "Box.hpp"
-#include "Hotaru.hpp"
+#include "SceneHotaru.hpp"
 
 #define NUM 30
+#define HOTARU 4
 
 class ofApp : public ofBaseApp{
 
@@ -26,12 +25,8 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    void connectBoxes(Box box[NUM]);
-		
-    ofFbo myFbo;
-    ofxPostGlitch myGlitch;
-    ofCamera camera;
-    Box box[NUM];
-    ofVec3f middle;
-    Hotaru hotaru;
+    SceneHotaru hotaru;
+    vector<ofVec2f> circles;
+    vector<ofVec2f> velocity;
+    int clock = 0;
 };

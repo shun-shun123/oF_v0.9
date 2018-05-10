@@ -15,13 +15,13 @@
 class Box {
     public :
         Box();
-        void set();
+        void draw();
+        void connect(vector<Box> box, int myIndex);
         ofVec3f getPosition();
+        int getSize();
     private :
         ofBoxPrimitive box;
         ofVec3f position;
-        ofVec3f middle;
         ofColor color;
         int size;
-        static const int spread = 2;
 };
