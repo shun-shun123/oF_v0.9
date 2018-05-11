@@ -16,9 +16,9 @@ class Box {
     public :
         Box();
         void draw();
-        void connect(vector<Box> box, int myIndex);
         ofVec3f getPosition();
         int getSize();
+        ofColor getColor();
     private :
         ofBoxPrimitive box;
         ofVec3f position;

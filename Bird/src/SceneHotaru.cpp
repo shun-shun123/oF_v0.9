@@ -16,8 +16,6 @@ void SceneHotaru::setup() {
     myGlitch.setup(&myFbo);
     myGlitch.setFx(OFXPOSTGLITCH_GLOW, true);
     
-    hotaru.push_back(Hotaru());
-    
     for (int i = 0; i < NUM; i++) {
         box.push_back(Box());
         middle += box[i].getPosition();
@@ -26,56 +24,48 @@ void SceneHotaru::setup() {
 }
 
 void SceneHotaru::update() {
-    cout << box.size() << endl;
+//    updateForce();
     myFbo.begin();
     ofClear(0);
     switch (state) {
         case 0 :
             camera.setPosition(box[index].getPosition());
-            camera.lookAt(hotaru[0].getPosition());
+            camera.lookAt(hotaru.getPosition());
             break;
         case 1 :
-            camera.setPosition(hotaru[0].getPosition());
-            camera.lookAt(hotaru[0].getVelocity() * 2.0);
+            camera.setPosition(hotaru.getPosition());
+            camera.lookAt(hotaru.getVelocity() * 2.0);
             break;
         case 2 :
             camera.setPosition(0, ofGetWidth() * 2, ofGetWidth());
             camera.lookAt(ofVec3f(0, 0, 0));
             break;
     }
-//    updateForce();
     camera.begin();
+    connectBox(box);
     for (int i = 0; i < box.size(); i++) {
         if (index == i) {
             continue;
         }
-        box[i].connect(box, i);
         box[i].draw();
     }
-    for (int i = 0; i < hotaru.size(); i++) {
-        hotaru[i].move(state);
+    hotaru.move(state);
+    hotaru.hitBox(box, hotaru.getPosition(), particles);
+    for (int i = 0; i < particles.size(); i++) {
+        if (!particles[i].check()) {
+            particles[i].flow();
+        } else {
+            particles[i].stay();
+        }
     }
     camera.end();
     myFbo.end();
-    hotaru[0].hitBox(box, hotaru);
 }
 
 void SceneHotaru::draw() {
 //    myGlitch.generateFx();
     myFbo.draw(0, 0);
 }
-
-//void SceneHotaru::updateForce() {
-//    int count = 0;
-//    for (int i = 0; i < box.size(); i++) {
-//        if (hotaru.getPosition().distance(box[i].getPosition()) <= 50.0) {
-//            force += hotaru.getPosition();
-//            count++;
-//        }
-//    }
-//    force /= count;
-//    hotaru.applyForce(force);
-//}
 
 void SceneHotaru::keyPressed(int key) {
     switch (key) {
@@ -89,5 +79,22 @@ void SceneHotaru::keyPressed(int key) {
         case '0' :
             state = 0;
             break;
+    }
+}
+
+void SceneHotaru::updateForce() {
+    ofVec3f force = box[0].getPosition() / hotaru.getPosition();
+    force /= hotaru.getPosition().distance(box[0].getPosition());
+    force *= ofRandom(4, 6);
+    hotaru.applyForce(force);
+}
+
+void SceneHotaru::connectBox(vector<Box> box) {
+    for (int i = 0; i < box.size(); i++) {
+        if (i == box.size() - 1) {
+            ofDrawLine(box[i].getPosition(), box[0].getPosition());
+        } else {
+            ofDrawLine(box[i].getPosition(), box[i + 1].getPosition());
+        }
     }
 }

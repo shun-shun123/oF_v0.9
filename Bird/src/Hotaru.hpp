@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "Box.hpp"
+#include "Particle.hpp"
 
 #endif /* Hotaru_hpp */
 
@@ -23,8 +24,7 @@ class Hotaru {
         ofVec3f getVelocity();
         int getSize();
         void applyForce(ofVec3f force);
-        void hitBox(vector<Box>& box, vector<Hotaru>& hotaru);
-    
+        void hitBox(vector<Box>& box, ofVec3f hotaruPos, vector<Particle>& particles);
     private :
         int halfWidth = ofGetWidth() / 2;
         void bound(ofVec3f position);

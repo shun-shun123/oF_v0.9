@@ -23,18 +23,14 @@ void Box::draw() {
     ofPopStyle();
 }
 
-void Box::connect(vector<Box> box, int myIndex) {
-    if (myIndex == box.size() - 1) {
-        ofDrawLine(box[myIndex].getPosition(), box[0].getPosition());
-    } else {
-        ofDrawLine(box[myIndex].getPosition(), box[myIndex + 1].getPosition());
-    }
-}
-
 ofVec3f Box::getPosition() {
-    return position;
+    return this->position;
 }
 
 int Box::getSize() {
-    return size;
+    return this->size;
+}
+
+ofColor Box::getColor() {
+    return this->color;
 }

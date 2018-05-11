@@ -22,6 +22,7 @@ Hotaru::Hotaru(int _size) {
 
 void Hotaru::applyForce(ofVec3f force) {
     velocity += force;
+//    velocity /= 1.01;
 }
 
 void Hotaru::move(int state) {
@@ -34,18 +35,16 @@ void Hotaru::move(int state) {
     }
 }
 
-void Hotaru::hitBox(vector<Box>& box, vector<Hotaru>& hotaru) {
-    for (int i = 0; i < hotaru.size(); i++) {
-        for (int j = 0; j < box.size(); j++) {
-            if (hotaru[i].getPosition().distance(box[j].getPosition()) <= box[j].getSize() + hotaru[i].getSize()) {
-                box.erase(box.begin() + j);
-                hotaru.push_back(Hotaru(ofRandom(30, 50)));
-                break;
-            }
+void Hotaru::hitBox(vector<Box>& box, ofVec3f hotaruPos, vector<Particle>& particles) {
+    for (int j = 0; j < box.size(); j++) {
+        if (position.distance(box[j].getPosition()) <= box[j].getSize() + 50) {
+            for (int i = 0; i < 30; i++)
+                particles.push_back(Particle(box[j].getPosition(), box[j].getColor()));
+            box.erase(box.begin() + j);
+            break;
         }
     }
 }
-
 
 void Hotaru::bound(ofVec3f position) {
     int halfWidth = ofGetWidth() / 2;

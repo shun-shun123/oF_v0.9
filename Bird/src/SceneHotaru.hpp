@@ -23,14 +23,18 @@ class SceneHotaru : public ofBaseApp {
         void update();
         void draw();
         void keyPressed(int key);
+        void connectBox(vector<Box> box);
+        void updateForce();
     private :
         ofFbo myFbo;
         ofxPostGlitch myGlitch;
         ofCamera camera;
         vector<Box> box;
-        vector<Hotaru> hotaru;
+        Hotaru hotaru;
+        vector<Particle> particles;
         int state = 1;
         int index = 0;
         ofVec3f force;
         ofVec3f middle;
+        Particle particle;
 };
