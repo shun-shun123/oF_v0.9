@@ -29,4 +29,5 @@ class ofApp : public ofBaseApp{
     vector<ofVec2f> circles;
     vector<ofVec2f> velocity;
     int clock = 0;
+    ofEasyCam cam;
 };
