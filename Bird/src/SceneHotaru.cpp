@@ -90,11 +90,10 @@ void SceneHotaru::updateForce() {
 }
 
 void SceneHotaru::connectBox(vector<Box> box) {
+    myVbo.clear();
     for (int i = 0; i < box.size(); i++) {
-        if (i == box.size() - 1) {
-            ofDrawLine(box[i].getPosition(), box[0].getPosition());
-        } else {
-            ofDrawLine(box[i].getPosition(), box[i + 1].getPosition());
-        }
+        boxVerts[i].set(box[i].getPosition());
     }
+    myVbo.setVertexData(boxVerts, box.size(), GL_DYNAMIC_DRAW);
+    myVbo.draw(GL_LINE_LOOP, 0, box.size());
 }

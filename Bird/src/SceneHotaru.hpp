@@ -37,4 +37,8 @@ class SceneHotaru : public ofBaseApp {
         ofVec3f force;
         ofVec3f middle;
         Particle particle;
+    
+        // vertex data for connectBox
+        ofVec3f boxVerts[NUM];
+        ofVbo myVbo;
 };
