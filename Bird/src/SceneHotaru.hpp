@@ -40,5 +40,9 @@ class SceneHotaru : public ofBaseApp {
     
         // vertex data for connectBox
         ofVec3f boxVerts[NUM];
+        ofFloatColor boxColor[NUM];
         ofVbo myVbo;
+    
+        // lighting
+        ofLight light;
 };

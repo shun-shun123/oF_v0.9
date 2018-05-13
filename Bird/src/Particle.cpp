@@ -17,7 +17,7 @@ Particle::Particle(ofVec3f _position, ofColor _color) {
     this->color = _color;
     this->velocity = ofVec3f(ofRandom(-3, 3), ofRandom(5), ofRandom(-3, 3));
     particle.setPosition(_position);
-    particle.set(ofRandom(1, 4), 100);
+    particle.set(ofRandom(1, 3), 10);
 }
 
 void Particle::flow() {

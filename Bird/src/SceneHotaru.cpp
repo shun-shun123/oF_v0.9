@@ -21,12 +21,24 @@ void SceneHotaru::setup() {
         middle += box[i].getPosition();
     }
     middle /= (float)NUM;
+    
+    // lighting
+//    light.enable();
+    light.setDirectional();
+    light.setPosition(hotaru.getPosition());
+    // 鏡面反射光の色
+    light.setSpecularColor(ofFloatColor(1.0, 1.0, 1.0));
+    // 拡散反射光の色
+    light.setDiffuseColor(ofFloatColor(0.5, 0.5, 1.0));
+    // 環境反射光の色
+    light.setAmbientColor(ofFloatColor(0.7, 0.7, 0.8, 1.0));
 }
 
 void SceneHotaru::update() {
 //    updateForce();
     myFbo.begin();
     ofClear(0);
+    light.setPosition(hotaru.getPosition());
     switch (state) {
         case 0 :
             camera.setPosition(box[index].getPosition());
@@ -43,6 +55,7 @@ void SceneHotaru::update() {
     }
     camera.begin();
     connectBox(box);
+    light.enable();
     for (int i = 0; i < box.size(); i++) {
         if (index == i) {
             continue;
@@ -91,9 +104,21 @@ void SceneHotaru::updateForce() {
 
 void SceneHotaru::connectBox(vector<Box> box) {
     myVbo.clear();
+    float distance;
     for (int i = 0; i < box.size(); i++) {
-        boxVerts[i].set(box[i].getPosition());
+//        boxVerts[i].set(box[i].getPosition());
+//        boxColor[i].set((ofFloatColor)box[i].getColor());
+        if (i == box.size() - 1) {
+            distance = box[i].getPosition().distance(box[0].getPosition());
+            ofSetLineWidth((ofGetWidth() / distance) * 2);
+            ofDrawLine(box[i].getPosition(), box[0].getPosition());
+        } else {
+            distance = box[i].getPosition().distance(box[i + 1].getPosition());
+            ofSetLineWidth((ofGetWidth() / distance) * 2);
+            ofDrawLine(box[i].getPosition(), box[i + 1].getPosition());
+        }
     }
-    myVbo.setVertexData(boxVerts, box.size(), GL_DYNAMIC_DRAW);
-    myVbo.draw(GL_LINE_LOOP, 0, box.size());
+//    myVbo.setVertexData(boxVerts, box.size(), GL_DYNAMIC_DRAW);
+//    myVbo.setColorData(boxColor, box.size(), GL_DYNAMIC_DRAW);
+//    myVbo.draw(GL_LINE_LOOP, 0, box.size());
 }
