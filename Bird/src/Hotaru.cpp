@@ -33,7 +33,10 @@ void Hotaru::move(int state) {
         hotaru.draw();
     }
     for (int i = 0; i < particles.size(); i++) {
-        particles[i].flow();
+        if (particles[i].check())
+            particles[i].stay();
+        else
+            particles[i].flow();
     }
 }
 

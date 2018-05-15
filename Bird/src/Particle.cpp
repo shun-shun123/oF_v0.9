@@ -18,48 +18,32 @@ Particle::Particle(ofVec3f _position, ofColor _color) {
     for (int i = 0; i < NUM; i++) {
         this->velocity[i] = ofVec3f(ofRandom(-3, 3), ofRandom(5), ofRandom(-3, 3));
     }
-    particle.setPosition(_position);
-    particle.set(ofRandom(1, 3), 10);
 }
 
 void Particle::flow() {
     update();
-//    ofPushStyle();
-//    ofSetColor(color);
-//    particle.draw();
     draw();
-//    ofPopStyle();
 }
 
 void Particle::stay() {
-    update();
-//    ofPushStyle();
-//    ofSetColor(color);
-//    particle.draw();
     draw();
-//    ofPopStyle();
 }
 
-//void Particle::update() {
-//    position += velocity;
-//    particle.setPosition(position);
-//    if (startPos.distance(position) >= 200) {
-//        isThreshold = true;
-//    }
-//}
 
 bool Particle::check() {
+    if (startPos.distance(verts[0]) >= 500)
+        isThreshold = true;
     return isThreshold;
 }
 
 void Particle::setup() {
     ofDirectory dir;
-    dir.listDir("textures");
+    dir.listDir("tex");
     
     // テクスチャを２乗モードに
     ofDisableArbTex();
     
-    for (int i = 0; i < dir.size(); i++) {
+    for (int i = 0; i < 1; i++) {
         ofImage img;
         img.load(dir.getPath(i));
         textures.push_back(img);
@@ -94,12 +78,14 @@ void Particle::update() {
 void Particle::draw() {
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     
+    ofEnableAlphaBlending();
+    
     ofEnablePointSprites();
     
     mPointSprite.begin();
     
     mPointSprite.setUniformTexture("tex1", textures[0], 0);
-    mPointSprite.setUniformTexture("tex2", textures[1], 1);
+//    mPointSprite.setUniformTexture("tex2", textures[1], 1);
     
     vbo.draw(GL_POINTS, 0, NUM);
     mPointSprite.end();

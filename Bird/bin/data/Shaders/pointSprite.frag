@@ -12,7 +12,8 @@ void main() {
     
     if(textureNumber == 0)color = texture2D(tex1,st);
     else color = texture2D(tex2,st);
-    
+    if (color.a == 0.0)
+        discard;
     gl_FragColor =  color * gl_Color;
     
 }
