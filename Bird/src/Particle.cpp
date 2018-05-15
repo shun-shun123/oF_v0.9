@@ -15,8 +15,9 @@ Particle::Particle(ofVec3f _position, ofColor _color) {
     this->position = _position;
     this->startPos = _position;
     this->color = _color;
-    for (int i = 0; i < NUM; i++) {
-        this->velocity[i] = ofVec3f(ofRandom(-3, 3), ofRandom(5), ofRandom(-3, 3));
+    this->velocity[0] = ofVec3f(5, 5, 5);
+    for (int i = 1; i < NUM; i++) {
+        this->velocity[i] = ofVec3f(ofRandom(-10, 10), ofRandom(-6, 6), ofRandom(-5, 5));
     }
 }
 
@@ -68,6 +69,7 @@ void Particle::setup() {
 
 void Particle::update() {
     for (int i = 0; i < NUM; i++) {
+        velocity[i] *= friction;
         verts[i] += velocity[i];
     }
     vbo.updateVertexData(verts, NUM);

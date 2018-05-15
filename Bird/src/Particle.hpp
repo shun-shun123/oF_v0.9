@@ -35,5 +35,6 @@ class Particle {
         ofVec3f position;
         ofColor color;
         ofVec3f velocity[NUM];
+        ofVec3f friction = ofVec3f(0.97, 0.97, 0.97);
         bool isThreshold = false;
 };
