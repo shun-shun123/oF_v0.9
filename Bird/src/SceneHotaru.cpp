@@ -34,7 +34,6 @@ void SceneHotaru::setup() {
 }
 
 void SceneHotaru::update() {
-//    updateForce();
     myFbo.begin();
     ofClear(0);
     light.setPosition(hotaru.getPosition());
@@ -62,7 +61,7 @@ void SceneHotaru::update() {
         box[i].draw();
     }
     hotaru.hitBox(box, hotaru.getPosition());
-    hotaru.move(state);
+    hotaru.move(state, box);
     camera.end();
     myFbo.end();
 }
@@ -85,13 +84,6 @@ void SceneHotaru::keyPressed(int key) {
             state = 0;
             break;
     }
-}
-
-void SceneHotaru::updateForce() {
-    ofVec3f force = box[0].getPosition() / hotaru.getPosition();
-    force /= hotaru.getPosition().distance(box[0].getPosition());
-    force *= ofRandom(4, 6);
-    hotaru.applyForce(force);
 }
 
 void SceneHotaru::connectBox(vector<Box> box) {

@@ -18,19 +18,20 @@
 class Hotaru {
     public :
         Hotaru();
-        Hotaru(int _size);
-        void move(int state);
-        void applyForce(ofVec3f force);
+        void move(int state, vector<Box> box);
         void hitBox(vector<Box>& box, ofVec3f hotaruPos);
         ofVec3f getPosition();
         ofVec3f getVelocity();
         int getSize();
         vector<Particle> particles;
     private :
+        void update(vector<Box> box);
         int halfWidth = ofGetWidth() / 2;
         void bound(ofVec3f position);
         ofSpherePrimitive hotaru;
         ofVec3f position;
         ofVec3f velocity;
+        ofVec3f targetAtractionForce;
         int size;
+        int targetBox = 0;
 };

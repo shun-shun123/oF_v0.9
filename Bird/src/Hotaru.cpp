@@ -12,19 +12,22 @@ Hotaru::Hotaru() {
     this->position = ofVec3f(ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth * 2, 0));
     this->velocity = ofVec3f(ofRandom(-5.0, 5.0), ofRandom(-5.0, 5.0), ofRandom(-5.0, 5.0));
     this->size = 50;
+    targetAtractionForce = ofVec3f(1, 1, 1);
+    targetAtractionForce.normalize();
 }
 
-Hotaru::Hotaru(int _size) {
-    this->position = ofVec3f(ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth * 2, 0));
-    this->velocity = ofVec3f(ofRandom(-5.0, 5.0), ofRandom(-5.0, 5.0), ofRandom(-5.0, 5.0));
-    this->size = _size;
+void Hotaru::update(vector<Box> box) {
+    // velocityの大きさ自体は変えずに方向のみ徐々に転換
+    double numerator = pow(velocity.x, 2.0) + pow(velocity.y, 2.0) + pow(velocity.z, 2.0);
+    double denominator = pow(velocity.x + targetAtractionForce.x, 2.0) + pow(velocity.y + targetAtractionForce.y, 2.0) + pow(velocity.z + targetAtractionForce.z, 2.0);
+    double parameter = sqrt(numerator / denominator);
+    targetAtractionForce = box[targetBox].getPosition() - position;
+    targetAtractionForce.normalize();
+    velocity = parameter * (velocity + targetAtractionForce);
 }
 
-void Hotaru::applyForce(ofVec3f force) {
-    velocity += force;
-}
-
-void Hotaru::move(int state) {
+void Hotaru::move(int state, vector<Box> box) {
+    update(box);
     bound(position);
     position += velocity;
     hotaru.setPosition(position);
@@ -42,7 +45,14 @@ void Hotaru::move(int state) {
 
 void Hotaru::hitBox(vector<Box>& box, ofVec3f hotaruPos) {
     for (int j = 0; j < box.size(); j++) {
-        if (position.distance(box[j].getPosition()) <= box[j].getSize() + 25) {
+        if (position.distance(box[j].getPosition()) <= box[j].getSize() + 50) {
+            // 次にホタルがターゲットにするBoxをランダムに設定
+            targetBox = (int)ofRandom(box.size());
+            // ターゲットにしたBoxまでのベクトルを計算
+            targetAtractionForce = box[targetBox].getPosition();
+            // ターゲットまでのベクトルを正規化
+            targetAtractionForce.normalize();
+            // パーティクル発生とBox削除の処理
             particles.push_back(Particle(box[j].getPosition(), box[j].getColor()));
             particles[particles.size() - 1].setup();
             box.erase(box.begin() + j);

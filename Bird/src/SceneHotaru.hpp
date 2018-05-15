@@ -24,7 +24,6 @@ class SceneHotaru : public ofBaseApp {
         void draw();
         void keyPressed(int key);
         void connectBox(vector<Box> box);
-        void updateForce();
     private :
         ofFbo myFbo;
         ofxPostGlitch myGlitch;
