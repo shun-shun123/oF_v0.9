@@ -22,14 +22,13 @@ void SceneHotaru::setup() {
     }
     middle /= (float)NUM;
     
-    // lighting
-//    light.enable();
-    light.setDirectional();
+    light.enable();
+    light.setPointLight();
     light.setPosition(hotaru.getPosition());
     // 鏡面反射光の色
     light.setSpecularColor(ofFloatColor(1.0, 1.0, 1.0));
     // 拡散反射光の色
-    light.setDiffuseColor(ofFloatColor(0.5, 0.5, 1.0));
+    light.setDiffuseColor(ofFloatColor(0.7, 0.7, 0.7));
     // 環境反射光の色
     light.setAmbientColor(ofFloatColor(0.7, 0.7, 0.8, 1.0));
 }
@@ -62,15 +61,8 @@ void SceneHotaru::update() {
         }
         box[i].draw();
     }
+    hotaru.hitBox(box, hotaru.getPosition());
     hotaru.move(state);
-    hotaru.hitBox(box, hotaru.getPosition(), particles);
-    for (int i = 0; i < particles.size(); i++) {
-        if (!particles[i].check()) {
-            particles[i].flow();
-        } else {
-            particles[i].stay();
-        }
-    }
     camera.end();
     myFbo.end();
 }
@@ -103,22 +95,13 @@ void SceneHotaru::updateForce() {
 }
 
 void SceneHotaru::connectBox(vector<Box> box) {
-    myVbo.clear();
+    ofMesh mesh;
     float distance;
     for (int i = 0; i < box.size(); i++) {
-//        boxVerts[i].set(box[i].getPosition());
-//        boxColor[i].set((ofFloatColor)box[i].getColor());
-        if (i == box.size() - 1) {
-            distance = box[i].getPosition().distance(box[0].getPosition());
-            ofSetLineWidth((ofGetWidth() / distance) * 2);
-            ofDrawLine(box[i].getPosition(), box[0].getPosition());
-        } else {
-            distance = box[i].getPosition().distance(box[i + 1].getPosition());
-            ofSetLineWidth((ofGetWidth() / distance) * 2);
-            ofDrawLine(box[i].getPosition(), box[i + 1].getPosition());
-        }
+        mesh.addVertex(box[i].getPosition());
+        mesh.addColor((ofFloatColor)box[i].getColor());
     }
-//    myVbo.setVertexData(boxVerts, box.size(), GL_DYNAMIC_DRAW);
-//    myVbo.setColorData(boxColor, box.size(), GL_DYNAMIC_DRAW);
-//    myVbo.draw(GL_LINE_LOOP, 0, box.size());
+    glLineWidth(2.0);
+    mesh.setMode(OF_PRIMITIVE_LINE_LOOP);
+    mesh.draw();
 }

@@ -2,7 +2,6 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-//    ofToggleFullscreen();
     hotaru.setup();
 }
 

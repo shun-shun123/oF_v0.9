@@ -31,7 +31,6 @@ class SceneHotaru : public ofBaseApp {
         ofCamera camera;
         vector<Box> box;
         Hotaru hotaru;
-        vector<Particle> particles;
         int state = 1;
         int index = 0;
         ofVec3f force;

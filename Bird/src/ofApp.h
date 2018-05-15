@@ -28,6 +28,8 @@ class ofApp : public ofBaseApp{
     SceneHotaru hotaru;
     vector<ofVec2f> circles;
     vector<ofVec2f> velocity;
+    Particle particle;
+    vector<Particle> par;
     int clock = 0;
     ofEasyCam cam;
 };

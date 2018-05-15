@@ -21,10 +21,11 @@ class Hotaru {
         Hotaru(int _size);
         void move(int state);
         void applyForce(ofVec3f force);
-        void hitBox(vector<Box>& box, ofVec3f hotaruPos, vector<Particle>& particles);
+        void hitBox(vector<Box>& box, ofVec3f hotaruPos);
         ofVec3f getPosition();
         ofVec3f getVelocity();
         int getSize();
+        vector<Particle> particles;
     private :
         int halfWidth = ofGetWidth() / 2;
         void bound(ofVec3f position);

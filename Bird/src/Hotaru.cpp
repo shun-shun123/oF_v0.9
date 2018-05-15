@@ -32,13 +32,16 @@ void Hotaru::move(int state) {
         hotaru.set(size, 30);
         hotaru.draw();
     }
+    for (int i = 0; i < particles.size(); i++) {
+        particles[i].flow();
+    }
 }
 
-void Hotaru::hitBox(vector<Box>& box, ofVec3f hotaruPos, vector<Particle>& particles) {
+void Hotaru::hitBox(vector<Box>& box, ofVec3f hotaruPos) {
     for (int j = 0; j < box.size(); j++) {
         if (position.distance(box[j].getPosition()) <= box[j].getSize() + 25) {
-            for (int i = 0; i < 30; i++)
-                particles.push_back(Particle(box[j].getPosition(), box[j].getColor()));
+            particles.push_back(Particle(box[j].getPosition(), box[j].getColor()));
+            particles[particles.size() - 1].setup();
             box.erase(box.begin() + j);
             break;
         }

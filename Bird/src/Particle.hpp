@@ -17,15 +17,24 @@ class Particle {
     public :
         Particle();
         Particle(ofVec3f _position, ofColor _color);
+    static const int NUM = 100;
+    ofVbo vbo;
+    ofVec3f verts[NUM];
+    ofFloatColor colors[NUM];
+    ofVec3f normals[NUM];
+    ofShader mPointSprite;
+    vector<ofImage> textures;
+    void setup();
+    void draw();
+        void update();
         void flow();
         bool check();
         void stay();
     private :
-        void update();
         ofSpherePrimitive particle;
         ofVec3f startPos;
         ofVec3f position;
         ofColor color;
-        ofVec3f velocity;
+        ofVec3f velocity[NUM];
         bool isThreshold;
 };
