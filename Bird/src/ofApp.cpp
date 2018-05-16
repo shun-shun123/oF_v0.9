@@ -3,6 +3,9 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     hotaru->setup();
+    cam.setPosition(0, 0, ofGetWidth());
+    cam.lookAt(ofVec3f(0, 0, -ofGetWidth()));
+    img.load("LiT.jpg"); // 1022 * 760
 }
 
 //--------------------------------------------------------------
@@ -16,9 +19,10 @@ void ofApp::draw(){
         hotaru->draw();
     } else {
         cam.begin();
+//        img.draw(-500, -500);
         particles = hotaru->getParticles();
         for (int i = 0; i < particles.size(); i++) {
-            particles[i]->flow();
+            particles[i]->align(img, i);
         }
         cam.end();
     }

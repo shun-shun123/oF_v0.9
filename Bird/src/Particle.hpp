@@ -22,6 +22,7 @@ class Particle {
         void draw();
         void flow();
         bool check();
+        void align(ofImage img, int row);
     private :
         vector<ofImage> textures;
         static const int NUM = 60;

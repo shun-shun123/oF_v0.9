@@ -13,6 +13,7 @@ Hotaru::Hotaru() {
     radius = 50;
     targetAtractionForce = ofVec3f(1, 1, 1);
     targetAtractionForce.normalize();
+    targetAtractionForce /= 5.0;
 }
 
 Hotaru::~Hotaru() {
@@ -23,6 +24,7 @@ void Hotaru::update(vector<Box *> box) {
     // velocityの大きさ自体は変えずに方向のみ徐々に転換
     targetAtractionForce = box[targetBox]->getPosition() - position;
     targetAtractionForce.normalize();
+    targetAtractionForce /= 5.0;
     double numerator = pow(velocity.x, 2.0) + pow(velocity.y, 2.0) + pow(velocity.z, 2.0);
     double denominator = pow(velocity.x + targetAtractionForce.x, 2.0) + pow(velocity.y + targetAtractionForce.y, 2.0) + pow(velocity.z + targetAtractionForce.z, 2.0);
     double parameter = sqrt(numerator / denominator);
@@ -58,6 +60,7 @@ void Hotaru::hitBox(vector<Box *>& box, ofVec3f hotaruPos) {
             // パーティクル発生とBox削除の処理
             particles.push_back(new Particle(box[i]->getPosition(), box[i]->getColor()));
             particles[particles.size() - 1]->setup();
+            delete(box[i]);
             box.erase(box.begin() + i);
             break;
         }

@@ -25,4 +25,5 @@ class ofApp : public ofBaseApp{
     SceneHotaru* hotaru = new SceneHotaru();
     vector<Particle *> particles;
     ofEasyCam cam;
+    ofImage img;
 };
