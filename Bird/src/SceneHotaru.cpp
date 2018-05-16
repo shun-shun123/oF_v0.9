@@ -7,6 +7,10 @@
 
 #include "SceneHotaru.hpp"
 
+SceneHotaru::~SceneHotaru() {
+    cout << "Destructor is called" << endl;
+}
+
 void SceneHotaru::setup() {
     ofBackground(0);
     ofSetVerticalSync(true);
@@ -35,7 +39,6 @@ void SceneHotaru::update() {
     }
     camera.begin();
     connectBox(box);
-    light.enable();
     for (int i = 0; i < box.size(); i++) {
         if (box[i].getPosition() == tmpPos) {
             continue;
@@ -70,6 +73,11 @@ void SceneHotaru::keyPressed(int key) {
 
 void SceneHotaru::connectBox(vector<Box> box) {
     ofMesh mesh;
+    // Boxが0になった時の処理
+    if (box.size() == 1) {
+        isFinished = true;
+        return;
+    }
     for (int i = 0; i < box.size(); i++) {
         mesh.addVertex(box[i].getPosition());
         mesh.addColor((ofFloatColor)box[i].getColor());
@@ -91,7 +99,7 @@ void SceneHotaru::initialize() {
     middle /= (float)NUM;
     
     // ライティング初期設定
-//    light.enable();
+    light.enable();
     light.setPointLight();
     light.setPosition(hotaru.getPosition());
     // 鏡面反射光の色
@@ -100,4 +108,12 @@ void SceneHotaru::initialize() {
     light.setDiffuseColor(ofFloatColor(0.7, 0.7, 0.7));
     // 環境反射光の色
     light.setAmbientColor(ofFloatColor(0.7, 0.7, 0.8, 1.0));
+}
+
+bool SceneHotaru::getFinish() {
+    return isFinished;
+}
+
+vector<Particle> SceneHotaru::getParticles() {
+    return hotaru.particles;
 }

@@ -3,9 +3,6 @@
 #include "ofMain.h"
 #include "SceneHotaru.hpp"
 
-#define NUM 30
-#define HOTARU 4
-
 class ofApp : public ofBaseApp{
 
 	public:
@@ -25,5 +22,7 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    SceneHotaru hotaru;
+    SceneHotaru* hotaru = new SceneHotaru();
+    vector<Particle> particles;
+    ofEasyCam cam;
 };

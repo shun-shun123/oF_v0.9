@@ -23,7 +23,7 @@ class Particle {
         bool check();
     private :
         vector<ofImage> textures;
-        static const int NUM = 100;
+        static const int NUM = 60;
         ofVbo vbo;
         ofVec3f verts[NUM];
         ofFloatColor colors[NUM];

@@ -2,22 +2,31 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    hotaru.setup();
+    hotaru->setup();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    hotaru.update();
+    hotaru->update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    hotaru.draw();
+    if (!hotaru->getFinish()) {
+        hotaru->draw();
+    } else {
+        cam.begin();
+        particles = hotaru->getParticles();
+        for (int i = 0; i < particles.size(); i++) {
+            particles[i].flow();
+        }
+        cam.end();
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    hotaru.keyPressed(key);
+    hotaru->keyPressed(key);
 }
 
 //--------------------------------------------------------------

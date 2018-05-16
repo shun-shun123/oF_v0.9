@@ -18,20 +18,24 @@
 
 class SceneHotaru : public ofBaseApp {
     public :
+        ~SceneHotaru();
         void setup();
         void update();
         void draw();
         void keyPressed(int key);
         void connectBox(vector<Box> box);
         void initialize();
+        bool getFinish();
+        vector<Particle> getParticles();
     private :
+        vector<Box> box;
         ofFbo myFbo;
         ofCamera camera;
-        vector<Box> box;
         Hotaru hotaru;
         int state = 1;
         int index = 0;
         ofVec3f tmpPos;
         ofVec3f middle;
         ofLight light;
+        bool isFinished = false;
 };

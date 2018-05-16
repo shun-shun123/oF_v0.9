@@ -29,7 +29,10 @@ void Hotaru::update(vector<Box> box) {
 }
 
 void Hotaru::move(int state, vector<Box> box) {
-    update(box);
+    // boxサイズが0になった時の処理
+    if (box.size() >= 2)
+        update(box);
+    // state == 1は球体目線なので描画しない
     if (state != 1) {
         hotaru.set(radius, 30);
         hotaru.draw();
@@ -40,6 +43,10 @@ void Hotaru::move(int state, vector<Box> box) {
 }
 
 void Hotaru::hitBox(vector<Box>& box, ofVec3f hotaruPos) {
+    // Boxサイズが１になった時の処理
+    if (box.size() == 1)
+        return;
+    // 以下hitBoxの処理実装
     for (int i = 0; i < box.size(); i++) {
         if (position.distance(box[i].getPosition()) <= box[i].getSize() / 2 + radius) {
             // 次にホタルがターゲットにするBoxをランダムに設定
