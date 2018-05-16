@@ -19,9 +19,9 @@ Hotaru::~Hotaru() {
     cout << "Hotaru destructor is called" << endl;
 }
 
-void Hotaru::update(vector<Box> box) {
+void Hotaru::update(vector<Box *> box) {
     // velocityの大きさ自体は変えずに方向のみ徐々に転換
-    targetAtractionForce = box[targetBox].getPosition() - position;
+    targetAtractionForce = box[targetBox]->getPosition() - position;
     targetAtractionForce.normalize();
     double numerator = pow(velocity.x, 2.0) + pow(velocity.y, 2.0) + pow(velocity.z, 2.0);
     double denominator = pow(velocity.x + targetAtractionForce.x, 2.0) + pow(velocity.y + targetAtractionForce.y, 2.0) + pow(velocity.z + targetAtractionForce.z, 2.0);
@@ -32,7 +32,7 @@ void Hotaru::update(vector<Box> box) {
     hotaru.setPosition(position);
 }
 
-void Hotaru::move(int state, vector<Box> box) {
+void Hotaru::move(int state, vector<Box *> box) {
     // boxサイズが0になった時の処理
     if (box.size() >= 2)
         update(box);
@@ -46,17 +46,17 @@ void Hotaru::move(int state, vector<Box> box) {
     }
 }
 
-void Hotaru::hitBox(vector<Box>& box, ofVec3f hotaruPos) {
+void Hotaru::hitBox(vector<Box *>& box, ofVec3f hotaruPos) {
     // Boxサイズが１になった時の処理
     if (box.size() == 1)
         return;
     // 以下hitBoxの処理実装
     for (int i = 0; i < box.size(); i++) {
-        if (position.distance(box[i].getPosition()) <= box[i].getSize() / 2 + radius) {
+        if (position.distance(box[i]->getPosition()) <= box[i]->getSize() / 2 + radius) {
             // 次にホタルがターゲットにするBoxをランダムに設定
             targetBox = (int)ofRandom(box.size() - 1);
             // パーティクル発生とBox削除の処理
-            particles.push_back(new Particle(box[i].getPosition(), box[i].getColor()));
+            particles.push_back(new Particle(box[i]->getPosition(), box[i]->getColor()));
             particles[particles.size() - 1]->setup();
             box.erase(box.begin() + i);
             break;

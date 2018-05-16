@@ -40,10 +40,10 @@ void SceneHotaru::update() {
     camera.begin();
     connectBox(box);
     for (int i = 0; i < box.size(); i++) {
-        if (box[i].getPosition() == tmpPos) {
+        if (box[i]->getPosition() == tmpPos) {
             continue;
         }
-        box[i].draw();
+        box[i]->draw();
     }
     hotaru.hitBox(box, hotaru.getPosition());
     hotaru.move(state, box);
@@ -66,12 +66,12 @@ void SceneHotaru::keyPressed(int key) {
         case '0' :
             state = 0;
             index = (int)ofRandom(box.size() - 1);
-            tmpPos = box[index].getPosition();
+            tmpPos = box[index]->getPosition();
             break;
     }
 }
 
-void SceneHotaru::connectBox(vector<Box> box) {
+void SceneHotaru::connectBox(vector<Box *> box) {
     ofMesh mesh;
     // Boxが0になった時の処理
     if (box.size() == 1) {
@@ -79,8 +79,8 @@ void SceneHotaru::connectBox(vector<Box> box) {
         return;
     }
     for (int i = 0; i < box.size(); i++) {
-        mesh.addVertex(box[i].getPosition());
-        mesh.addColor((ofFloatColor)box[i].getColor());
+        mesh.addVertex(box[i]->getPosition());
+        mesh.addColor((ofFloatColor)box[i]->getColor());
     }
     glLineWidth(3.0);
     mesh.setMode(OF_PRIMITIVE_LINE_LOOP);
@@ -93,8 +93,8 @@ void SceneHotaru::initialize() {
     
     // vector<Box> の初期設定とmiddleの算出
     for (int i = 0; i < NUM; i++) {
-        box.push_back(Box());
-        middle += box[i].getPosition();
+        box.push_back(new Box());
+        middle += box[i]->getPosition();
     }
     middle /= (float)NUM;
     

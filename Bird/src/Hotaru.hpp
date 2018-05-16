@@ -19,14 +19,14 @@ class Hotaru {
     public :
         Hotaru();
         ~Hotaru();
-        void move(int state, vector<Box> box);
-        void hitBox(vector<Box>& box, ofVec3f hotaruPos);
+        void move(int state, vector<Box *> box);
+        void hitBox(vector<Box *>& box, ofVec3f hotaruPos);
         ofVec3f getPosition();
         ofVec3f getVelocity();
         int getRadius();
         vector<Particle *> particles;
     private :
-        void update(vector<Box> box);
+        void update(vector<Box *> box);
         int halfWidth = ofGetWidth() / 2;
         void bound(ofVec3f position);
         ofSpherePrimitive hotaru;

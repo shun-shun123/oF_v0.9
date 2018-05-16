@@ -23,12 +23,12 @@ class SceneHotaru : public ofBaseApp {
         void update();
         void draw();
         void keyPressed(int key);
-        void connectBox(vector<Box> box);
+        void connectBox(vector<Box *> box);
         void initialize();
         bool getFinish();
         vector<Particle *> getParticles();
     private :
-        vector<Box> box;
+        vector<Box *> box;
         ofFbo myFbo;
         ofCamera camera;
         Hotaru hotaru;
