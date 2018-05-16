@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9004DB3F20A27B6F00F29F2F /* SceneHotaru.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9004DB3D20A27B6F00F29F2F /* SceneHotaru.cpp */; };
 		90327B8320A5905400264615 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90327B8120A5905400264615 /* Particle.cpp */; };
+		9038982C20AC781A009A3A39 /* SceneLogo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9038982A20AC781A009A3A39 /* SceneLogo.cpp */; };
 		90EF262F209C2BB1003A28C7 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90EF262D209C2BB1003A28C7 /* Box.cpp */; };
 		90EF2632209C31BF003A28C7 /* Hotaru.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90EF2630209C31BF003A28C7 /* Hotaru.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
@@ -53,6 +54,8 @@
 		9004DB3E20A27B6F00F29F2F /* SceneHotaru.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneHotaru.hpp; sourceTree = "<group>"; };
 		90327B8120A5905400264615 /* Particle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
 		90327B8220A5905400264615 /* Particle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Particle.hpp; sourceTree = "<group>"; };
+		9038982A20AC781A009A3A39 /* SceneLogo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneLogo.cpp; sourceTree = "<group>"; };
+		9038982B20AC781A009A3A39 /* SceneLogo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneLogo.hpp; sourceTree = "<group>"; };
 		90EF262D209C2BB1003A28C7 /* Box.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
 		90EF262E209C2BB1003A28C7 /* Box.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Box.hpp; sourceTree = "<group>"; };
 		90EF2630209C31BF003A28C7 /* Hotaru.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Hotaru.cpp; sourceTree = "<group>"; };
@@ -146,6 +149,8 @@
 				9004DB3E20A27B6F00F29F2F /* SceneHotaru.hpp */,
 				90327B8120A5905400264615 /* Particle.cpp */,
 				90327B8220A5905400264615 /* Particle.hpp */,
+				9038982A20AC781A009A3A39 /* SceneLogo.cpp */,
+				9038982B20AC781A009A3A39 /* SceneLogo.hpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -251,6 +256,7 @@
 				90EF2632209C31BF003A28C7 /* Hotaru.cpp in Sources */,
 				90EF262F209C2BB1003A28C7 /* Box.cpp in Sources */,
 				9004DB3F20A27B6F00F29F2F /* SceneHotaru.cpp in Sources */,
+				9038982C20AC781A009A3A39 /* SceneLogo.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				F6E7D6C01B3F2E112EB0533D /* ofxPostGlitch.cpp in Sources */,
 			);

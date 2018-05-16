@@ -1,8 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "SceneHotaru.hpp"
-
+#include "SceneLogo.hpp"
 class ofApp : public ofBaseApp{
 
 	public:
