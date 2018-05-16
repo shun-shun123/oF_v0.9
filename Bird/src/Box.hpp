@@ -18,10 +18,10 @@ class Box {
         void draw();
         ofVec3f getPosition();
         int getSize();
-        ofColor getColor();
+        ofFloatColor getColor();
     private :
         ofBoxPrimitive box;
         ofVec3f position;
-        ofColor color;
+        ofFloatColor color;
         int size;
 };

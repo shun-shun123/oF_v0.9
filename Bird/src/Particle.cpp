@@ -12,24 +12,22 @@ Particle::Particle() {
 }
 
 Particle::Particle(ofVec3f _position, ofColor _color) {
-    this->position = _position;
-    this->startPos = _position;
-    this->color = _color;
-    this->velocity[0] = ofVec3f(5, 5, 5);
+    startPos = _position;
+    for (int i = 0; i < NUM; i++) {
+        verts[i] = _position;
+        colors[i] = (ofFloatColor)_color;
+    }
+    velocity[0] = ofVec3f(5, 5, 5);
     for (int i = 1; i < NUM; i++) {
-        this->velocity[i] = ofVec3f(ofRandom(-10, 10), ofRandom(-6, 6), ofRandom(-5, 5));
+        velocity[i] = ofVec3f(ofRandom(-10, 10), ofRandom(-6, 6), ofRandom(-5, 5));
     }
 }
 
 void Particle::flow() {
-    update();
+    if (!check())
+        update();
     draw();
 }
-
-void Particle::stay() {
-    draw();
-}
-
 
 bool Particle::check() {
     if (startPos.distance(verts[0]) >= 500)
@@ -38,24 +36,17 @@ bool Particle::check() {
 }
 
 void Particle::setup() {
-    ofDirectory dir;
-    dir.listDir("tex");
-    
     // テクスチャを２乗モードに
     ofDisableArbTex();
     
-    for (int i = 0; i < 1; i++) {
-        ofImage img;
-        img.load(dir.getPath(i));
-        textures.push_back(img);
-    }
+    ofImage img;
+    img.load("tex/particle.png");
+    textures.push_back(img);
     
     // テクスチャを元のモードに
     ofEnableArbTex();
     
     for (int i = 0; i < NUM; i++) {
-        verts[i].set(position);
-        colors[i].set((ofFloatColor)color);
         // 法線の情報をポイントサイズとテクスチャの選択に利用
         normals[i].set(ofRandom(2, 50), (int)ofRandom(0, textures.size()));
     }
@@ -79,16 +70,11 @@ void Particle::update() {
 
 void Particle::draw() {
     ofEnableBlendMode(OF_BLENDMODE_ADD);
-    
     ofEnableAlphaBlending();
-    
     ofEnablePointSprites();
     
     mPointSprite.begin();
-    
     mPointSprite.setUniformTexture("tex1", textures[0], 0);
-//    mPointSprite.setUniformTexture("tex2", textures[1], 1);
-    
     vbo.draw(GL_POINTS, 0, NUM);
     mPointSprite.end();
     

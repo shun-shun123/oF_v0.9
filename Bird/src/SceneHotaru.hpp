@@ -11,7 +11,6 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "Hotaru.hpp"
-#include "ofxPostGlitch.h"
 
 #define NUM 30
 
@@ -24,23 +23,15 @@ class SceneHotaru : public ofBaseApp {
         void draw();
         void keyPressed(int key);
         void connectBox(vector<Box> box);
+        void initialize();
     private :
         ofFbo myFbo;
-        ofxPostGlitch myGlitch;
         ofCamera camera;
         vector<Box> box;
         Hotaru hotaru;
         int state = 1;
         int index = 0;
-        ofVec3f force;
+        ofVec3f tmpPos;
         ofVec3f middle;
-        Particle particle;
-    
-        // vertex data for connectBox
-        ofVec3f boxVerts[NUM];
-        ofFloatColor boxColor[NUM];
-        ofVbo myVbo;
-    
-        // lighting
         ofLight light;
 };

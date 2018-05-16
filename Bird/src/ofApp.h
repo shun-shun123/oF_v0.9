@@ -26,10 +26,4 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     SceneHotaru hotaru;
-    vector<ofVec2f> circles;
-    vector<ofVec2f> velocity;
-    Particle particle;
-    vector<Particle> par;
-    int clock = 0;
-    ofEasyCam cam;
 };

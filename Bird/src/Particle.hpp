@@ -21,7 +21,6 @@ class Particle {
         void draw();
         void flow();
         bool check();
-        void stay();
     private :
         vector<ofImage> textures;
         static const int NUM = 100;
@@ -32,8 +31,6 @@ class Particle {
         ofShader mPointSprite;
         void update();
         ofVec3f startPos;
-        ofVec3f position;
-        ofColor color;
         ofVec3f velocity[NUM];
         ofVec3f friction = ofVec3f(0.97, 0.97, 0.97);
         bool isThreshold = false;

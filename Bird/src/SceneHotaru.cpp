@@ -12,25 +12,7 @@ void SceneHotaru::setup() {
     ofSetVerticalSync(true);
     ofSetDepthTest(true);
     
-    myFbo.allocate(ofGetWidth(), ofGetWidth());
-    myGlitch.setup(&myFbo);
-    myGlitch.setFx(OFXPOSTGLITCH_GLOW, true);
-    
-    for (int i = 0; i < NUM; i++) {
-        box.push_back(Box());
-        middle += box[i].getPosition();
-    }
-    middle /= (float)NUM;
-    
-    light.enable();
-    light.setPointLight();
-    light.setPosition(hotaru.getPosition());
-    // 鏡面反射光の色
-    light.setSpecularColor(ofFloatColor(1.0, 1.0, 1.0));
-    // 拡散反射光の色
-    light.setDiffuseColor(ofFloatColor(0.7, 0.7, 0.7));
-    // 環境反射光の色
-    light.setAmbientColor(ofFloatColor(0.7, 0.7, 0.8, 1.0));
+    initialize();
 }
 
 void SceneHotaru::update() {
@@ -39,12 +21,12 @@ void SceneHotaru::update() {
     light.setPosition(hotaru.getPosition());
     switch (state) {
         case 0 :
-            camera.setPosition(box[index].getPosition());
+            camera.setPosition(tmpPos);
             camera.lookAt(hotaru.getPosition());
             break;
         case 1 :
             camera.setPosition(hotaru.getPosition());
-            camera.lookAt(hotaru.getVelocity() * 2.0);
+            camera.lookAt(hotaru.getVelocity());
             break;
         case 2 :
             camera.setPosition(0, ofGetWidth() * 2, ofGetWidth());
@@ -55,7 +37,7 @@ void SceneHotaru::update() {
     connectBox(box);
     light.enable();
     for (int i = 0; i < box.size(); i++) {
-        if (index == i) {
+        if (box[i].getPosition() == tmpPos) {
             continue;
         }
         box[i].draw();
@@ -67,7 +49,6 @@ void SceneHotaru::update() {
 }
 
 void SceneHotaru::draw() {
-//    myGlitch.generateFx();
     myFbo.draw(0, 0);
 }
 
@@ -78,22 +59,45 @@ void SceneHotaru::keyPressed(int key) {
             break;
         case '1' :
             state = 1;
-            index = (int)ofRandom(box.size());
             break;
         case '0' :
             state = 0;
+            index = (int)ofRandom(box.size() - 1);
+            tmpPos = box[index].getPosition();
             break;
     }
 }
 
 void SceneHotaru::connectBox(vector<Box> box) {
     ofMesh mesh;
-    float distance;
     for (int i = 0; i < box.size(); i++) {
         mesh.addVertex(box[i].getPosition());
         mesh.addColor((ofFloatColor)box[i].getColor());
     }
-    glLineWidth(2.0);
+    glLineWidth(3.0);
     mesh.setMode(OF_PRIMITIVE_LINE_LOOP);
     mesh.draw();
+}
+
+void SceneHotaru::initialize() {
+    // FBOの割り当て
+    myFbo.allocate(ofGetWidth(), ofGetWidth());
+    
+    // vector<Box> の初期設定とmiddleの算出
+    for (int i = 0; i < NUM; i++) {
+        box.push_back(Box());
+        middle += box[i].getPosition();
+    }
+    middle /= (float)NUM;
+    
+    // ライティング初期設定
+//    light.enable();
+    light.setPointLight();
+    light.setPosition(hotaru.getPosition());
+    // 鏡面反射光の色
+    light.setSpecularColor(ofFloatColor(1.0, 1.0, 1.0));
+    // 拡散反射光の色
+    light.setDiffuseColor(ofFloatColor(0.7, 0.7, 0.7));
+    // 環境反射光の色
+    light.setAmbientColor(ofFloatColor(0.7, 0.7, 0.8, 1.0));
 }

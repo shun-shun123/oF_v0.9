@@ -22,7 +22,7 @@ class Hotaru {
         void hitBox(vector<Box>& box, ofVec3f hotaruPos);
         ofVec3f getPosition();
         ofVec3f getVelocity();
-        int getSize();
+        int getRadius();
         vector<Particle> particles;
     private :
         void update(vector<Box> box);
@@ -32,6 +32,6 @@ class Hotaru {
         ofVec3f position;
         ofVec3f velocity;
         ofVec3f targetAtractionForce;
-        int size;
+        int radius;
         int targetBox = 0;
 };

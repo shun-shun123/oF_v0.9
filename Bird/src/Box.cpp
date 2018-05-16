@@ -9,11 +9,11 @@
 
 Box::Box() {
     int halfWidth = ofGetWidth() / 2;
-    this->position = ofVec3f(ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth * 2, 0));
-    this->size = ofRandom(30, 100);
-    this->color = ofColor::fromHsb(ofRandom(255), 255, 255);
-    box.setPosition(this->position);
-    box.set(this->size);
+    position = ofVec3f(ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth, halfWidth), ofRandom(-halfWidth * 2, 0));
+    size = ofRandom(30, 100);
+    color = ofFloatColor::fromHsb(ofRandom(1.0), 1.0, 1.0);
+    box.setPosition(position);
+    box.set(size);
 }
 
 void Box::draw() {
@@ -24,13 +24,13 @@ void Box::draw() {
 }
 
 ofVec3f Box::getPosition() {
-    return this->position;
+    return position;
 }
 
 int Box::getSize() {
-    return this->size;
+    return size;
 }
 
-ofColor Box::getColor() {
-    return this->color;
+ofFloatColor Box::getColor() {
+    return color;
 }
