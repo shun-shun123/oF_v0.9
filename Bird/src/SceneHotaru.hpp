@@ -26,7 +26,7 @@ class SceneHotaru : public ofBaseApp {
         void connectBox(vector<Box> box);
         void initialize();
         bool getFinish();
-        vector<Particle> getParticles();
+        vector<Particle *> getParticles();
     private :
         vector<Box> box;
         ofFbo myFbo;

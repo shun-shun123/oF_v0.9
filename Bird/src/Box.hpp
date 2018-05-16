@@ -15,6 +15,7 @@
 class Box {
     public :
         Box();
+        ~Box();
         void draw();
         ofVec3f getPosition();
         int getSize();

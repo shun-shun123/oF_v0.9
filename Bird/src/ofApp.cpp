@@ -18,7 +18,7 @@ void ofApp::draw(){
         cam.begin();
         particles = hotaru->getParticles();
         for (int i = 0; i < particles.size(); i++) {
-            particles[i].flow();
+            particles[i]->flow();
         }
         cam.end();
     }

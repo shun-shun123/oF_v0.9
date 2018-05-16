@@ -16,6 +16,7 @@
 class Particle {
     public :
         Particle();
+        ~Particle();
         Particle(ofVec3f _position, ofColor _color);
         void setup();
         void draw();

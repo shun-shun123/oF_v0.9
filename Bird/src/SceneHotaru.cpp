@@ -8,7 +8,7 @@
 #include "SceneHotaru.hpp"
 
 SceneHotaru::~SceneHotaru() {
-    cout << "Destructor is called" << endl;
+    cout << "SceneHotaru destructor is called" << endl;
 }
 
 void SceneHotaru::setup() {
@@ -114,6 +114,6 @@ bool SceneHotaru::getFinish() {
     return isFinished;
 }
 
-vector<Particle> SceneHotaru::getParticles() {
+vector<Particle*> SceneHotaru::getParticles() {
     return hotaru.particles;
 }

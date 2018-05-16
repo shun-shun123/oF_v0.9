@@ -15,6 +15,10 @@ Hotaru::Hotaru() {
     targetAtractionForce.normalize();
 }
 
+Hotaru::~Hotaru() {
+    cout << "Hotaru destructor is called" << endl;
+}
+
 void Hotaru::update(vector<Box> box) {
     // velocityの大きさ自体は変えずに方向のみ徐々に転換
     targetAtractionForce = box[targetBox].getPosition() - position;
@@ -38,7 +42,7 @@ void Hotaru::move(int state, vector<Box> box) {
         hotaru.draw();
     }
     for (int i = 0; i < particles.size(); i++) {
-        particles[i].flow();
+        particles[i]->flow();
     }
 }
 
@@ -52,8 +56,8 @@ void Hotaru::hitBox(vector<Box>& box, ofVec3f hotaruPos) {
             // 次にホタルがターゲットにするBoxをランダムに設定
             targetBox = (int)ofRandom(box.size() - 1);
             // パーティクル発生とBox削除の処理
-            particles.push_back(Particle(box[i].getPosition(), box[i].getColor()));
-            particles[particles.size() - 1].setup();
+            particles.push_back(new Particle(box[i].getPosition(), box[i].getColor()));
+            particles[particles.size() - 1]->setup();
             box.erase(box.begin() + i);
             break;
         }

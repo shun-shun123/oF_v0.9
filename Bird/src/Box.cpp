@@ -16,6 +16,10 @@ Box::Box() {
     box.set(size);
 }
 
+Box::~Box() {
+    cout << "Box destructor is called" << endl;
+}
+
 void Box::draw() {
     ofPushStyle();
     ofSetColor(color);

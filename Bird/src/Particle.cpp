@@ -11,6 +11,10 @@ Particle::Particle() {
     Particle(ofVec3f(500, 500, -1000), ofColor::fromHsb(100, 255, 255));
 }
 
+Particle::~Particle() {
+    cout << "Particle destructor is called" << endl;
+}
+
 Particle::Particle(ofVec3f _position, ofColor _color) {
     startPos = _position;
     for (int i = 0; i < NUM; i++) {
