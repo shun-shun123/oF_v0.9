@@ -22,6 +22,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     SceneHotaru* hotaru = new SceneHotaru();
+    SceneLogo* logo = new SceneLogo();
     vector<Particle *> particles;
     ofEasyCam cam;
     ofImage img;

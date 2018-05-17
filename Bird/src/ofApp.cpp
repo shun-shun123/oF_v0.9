@@ -6,6 +6,7 @@ void ofApp::setup(){
     cam.setPosition(0, 0, ofGetWidth());
     cam.lookAt(ofVec3f(0, 0, -ofGetWidth()));
     img.load("LiT.jpg"); // 1022 * 760
+    logo->setup(particles);
 }
 
 //--------------------------------------------------------------
@@ -24,6 +25,7 @@ void ofApp::draw(){
         for (int i = 0; i < particles.size(); i++) {
             particles[i]->align(img, i);
         }
+        logo->draw();
         cam.end();
     }
 }

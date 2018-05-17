@@ -25,15 +25,16 @@ class Particle {
         void align(ofImage img, int row);
     private :
         vector<ofImage> textures;
-        static const int NUM = 60;
+        static const int NUM = 50;
+        ofVec3f startPos;
+        ofVec3f friction = ofVec3f(0.97, 0.97, 0.97);
+        bool isThreshold = false;
+    protected :
         ofVbo vbo;
         ofVec3f verts[NUM];
         ofFloatColor colors[NUM];
         ofVec3f normals[NUM];
         ofShader mPointSprite;
         void update();
-        ofVec3f startPos;
         ofVec3f velocity[NUM];
-        ofVec3f friction = ofVec3f(0.97, 0.97, 0.97);
-        bool isThreshold = false;
 };

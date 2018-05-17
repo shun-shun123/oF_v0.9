@@ -14,7 +14,8 @@ SceneHotaru::~SceneHotaru() {
 void SceneHotaru::setup() {
     ofBackground(0);
     ofSetVerticalSync(true);
-    ofSetDepthTest(true);
+    ofEnableDepthTest();
+    ofEnableSmoothing();
     
     initialize();
 }
@@ -22,7 +23,6 @@ void SceneHotaru::setup() {
 void SceneHotaru::update() {
     myFbo.begin();
     ofClear(0);
-    light.setPosition(hotaru.getPosition());
     switch (state) {
         case 0 :
             camera.setPosition(tmpPos);
@@ -101,13 +101,14 @@ void SceneHotaru::initialize() {
     // ライティング初期設定
     light.enable();
     light.setPointLight();
-    light.setPosition(hotaru.getPosition());
+    light.setPosition(middle);
     // 鏡面反射光の色
     light.setSpecularColor(ofFloatColor(1.0, 1.0, 1.0));
     // 拡散反射光の色
     light.setDiffuseColor(ofFloatColor(0.7, 0.7, 0.7));
     // 環境反射光の色
     light.setAmbientColor(ofFloatColor(0.7, 0.7, 0.8, 1.0));
+    
 }
 
 bool SceneHotaru::getFinish() {

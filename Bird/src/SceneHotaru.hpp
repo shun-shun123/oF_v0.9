@@ -37,5 +37,6 @@ class SceneHotaru : public ofBaseApp {
         ofVec3f tmpPos;
         ofVec3f middle;
         ofLight light;
+        ofLight spotLight;
         bool isFinished = false;
 };

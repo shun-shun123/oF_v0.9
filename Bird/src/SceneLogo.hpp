@@ -13,7 +13,16 @@
 
 #endif /* SceneLogo_hpp */
 
-class SceneLogo {
-  
-    
+#define BOX_NUM 29
+#define PARTICLE_NUM 60
+
+class SceneLogo : public Particle {
+    public :
+        void setup(vector<Particle *> _particles);
+        void update();
+        void draw();
+    private :
+        vector<Particle *> particles;
+        ofVec3f aim[BOX_NUM][PARTICLE_NUM];
+        ofTrueTypeFont verdana;
 };
