@@ -22,14 +22,13 @@ class Particle {
         void draw();
         void flow();
         bool check();
-        void align(ofImage img, int row);
     private :
         vector<ofImage> textures;
         static const int NUM = 50;
         ofVec3f startPos;
         ofVec3f friction = ofVec3f(0.97, 0.97, 0.97);
         bool isThreshold = false;
-    protected :
+    public :
         ofVbo vbo;
         ofVec3f verts[NUM];
         ofFloatColor colors[NUM];

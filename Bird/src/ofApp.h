@@ -25,5 +25,5 @@ class ofApp : public ofBaseApp{
     SceneLogo* logo = new SceneLogo();
     vector<Particle *> particles;
     ofEasyCam cam;
-    ofImage img;
+    bool isUpdate = false;
 };
