@@ -84,17 +84,3 @@ void Particle::draw() {
     
     ofDisablePointSprites();
 }
-
-void Particle::align(ofImage img, int row) {
-    int width = img.getWidth();
-    int height = img.getHeight();
-    for (int i = 0; i < NUM; i++) {
-        verts[i].x = (ofGetWidth() / NUM) * (i + 1) - (ofGetWidth() / 2);
-        verts[i].y = (ofGetHeight() / 29) * row - (ofGetHeight() / 2);
-        verts[i] = ofVec3f(verts[i].x, verts[i].y, 0);
-    }
-    vbo.updateVertexData(verts, NUM);
-    vbo.updateColorData(colors, NUM);
-    vbo.updateNormalData(normals, NUM);
-    draw();
-}

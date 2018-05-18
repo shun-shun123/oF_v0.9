@@ -21,8 +21,14 @@ class SceneLogo : public Particle {
         void setup(vector<Particle *> _particles);
         void update();
         void draw();
+        void reverseX(vector<ofPolyline>& lines);
     private :
+        ofEasyCam cam;
         vector<Particle *> particles;
-        ofVec3f aim[BOX_NUM][PARTICLE_NUM];
         ofTrueTypeFont verdana;
+        vector<ofPolyline> firstLetter;
+        vector<ofPolyline> secondLetter;
+        vector<ofPolyline> thirdLetter;
+        vector<ofPolyline> fourthLetter;
+    ofVec3f letterL[3];
 };

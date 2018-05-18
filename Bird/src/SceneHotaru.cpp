@@ -68,6 +68,10 @@ void SceneHotaru::keyPressed(int key) {
             index = (int)ofRandom(box.size() - 1);
             tmpPos = box[index]->getPosition();
             break;
+        case ' ' :
+            if (box.size() == 1)
+                isFinished = true;
+            break;
     }
 }
 
@@ -75,7 +79,6 @@ void SceneHotaru::connectBox(vector<Box *> box) {
     ofMesh mesh;
     // Boxが0になった時の処理
     if (box.size() == 1) {
-        isFinished = true;
         return;
     }
     for (int i = 0; i < box.size(); i++) {

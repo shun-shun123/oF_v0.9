@@ -12,7 +12,7 @@
 #include "ofMain.h"
 #include "Hotaru.hpp"
 
-#define NUM 30
+#define NUM 8
 
 #endif /* SceneHotaru_hpp */
 

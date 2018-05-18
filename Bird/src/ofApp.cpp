@@ -3,15 +3,12 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     hotaru->setup();
-    cam.setPosition(0, 0, ofGetWidth());
-    cam.lookAt(ofVec3f(0, 0, -ofGetWidth()));
-    img.load("LiT.jpg"); // 1022 * 760
-    logo->setup(particles);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    hotaru->update();
+    if (!hotaru->getFinish())
+        hotaru->update();
 }
 
 //--------------------------------------------------------------
@@ -19,14 +16,17 @@ void ofApp::draw(){
     if (!hotaru->getFinish()) {
         hotaru->draw();
     } else {
-        cam.begin();
-//        img.draw(-500, -500);
-        particles = hotaru->getParticles();
-        for (int i = 0; i < particles.size(); i++) {
-            particles[i]->align(img, i);
+        if (!isSetupLogo) {
+            particles = hotaru->getParticles();
+            logo->setup(particles);
+            isSetupLogo = true;
         }
-        logo->draw();
+        cam.begin();
+        for (int i = 0; i < particles.size(); i++) {
+            particles[i]->flow();
+        }
         cam.end();
+        logo->draw();
     }
 }
 
