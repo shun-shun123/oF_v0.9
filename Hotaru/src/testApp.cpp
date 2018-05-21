@@ -8,8 +8,13 @@ void testApp::setup() {
     
     sample.load("sample.png");
     akimusi.sound.load("秋の夜の虫の音.mp3");
-    hotaru.cry();
-    akimusi.cry();
+//    hotaru.cry();
+//    akimusi.cry();
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    sphere.setPosition(ofGetWidth() / 2, ofGetHeight() / 2, 100);
+    sphere.set(1000, 200);
+    blur.setup(ofGetWidth(), ofGetHeight());
+    fbo.allocate(ofGetWidth(), ofGetHeight());
 }
 
 //--------------------------------------------------------------
@@ -18,12 +23,13 @@ void testApp::update(){
     brightness++;
     setBrightness(sample, brightness);
     color = ofColor::fromHsb(150, 255, brightness);
-    hotaru.update();
-    hotaru.setPan(ofMap(hotaru.pos.x, 0, ofGetWidth(), -1, 1));
-    hotaru.sound.setVolume(pow(ofNoise(ofGetElapsedTimeMillis()), 4));
-    akimusi.update();
-    akimusi.setPan(ofMap(hotaru.pos.x, 0, ofGetWidth(), -1, 1));
-    akimusi.sound.setVolume(pow(ofNoise(ofGetElapsedTimeMillis()), 6));
+//    hotaru.update();
+//    hotaru.setPan(ofMap(hotaru.pos.x, 0, ofGetWidth(), -1, 1));
+//    hotaru.sound.setVolume(pow(ofNoise(ofGetElapsedTimeMillis()), 4));
+//    akimusi.update();
+//    akimusi.setPan(ofMap(hotaru.pos.x, 0, ofGetWidth(), -1, 1));
+//    akimusi.sound.setVolume(pow(ofNoise(ofGetElapsedTimeMillis()), 6));
+    
 }
 
 //--------------------------------------------------------------
@@ -31,10 +37,20 @@ void testApp::draw(){
 //    for (int i = 0; i < HOTARU_NUM; i++) {
 //        hotaru[i].move();
 //    }
-    sample.draw(ofGetWidth() / 2, ofGetHeight() / 2);
-    hotaru.move();
-    akimusi.move();
-    season.setSeason();
+//    sample.draw(ofGetWidth() / 2, ofGetHeight() / 2);
+//    hotaru.move();
+//    akimusi.move();
+//    season.setSeason();
+    fbo.begin();
+    ofDisableBlendMode();
+    sphere.draw();
+    fbo.end();
+    
+    blur.begin();
+    ofDisableBlendMode();
+    ofBackground(0);
+    fbo.draw(0,0);
+    blur.end();
 }
 
 //--------------------------------------------------------------

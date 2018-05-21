@@ -11,7 +11,7 @@
 #define MAX_TEMPARATURE 30
 
 Environment::Environment() {
-    arduino.connect("/dev/cu.usbmodem14311", 57600);
+    arduino.connect("/dev/cu.usbmodem14111", 57600);
     ofToggleFullscreen();
     for (int i = 0; i < PARTICLE_NUM; i++) {
         particleSize[i] = ofRandom(3, 5);
@@ -60,7 +60,7 @@ float Environment::calcTemparature(int analog) {
 }
 
 ofFloatColor* Environment::getSeason() {
-    float hue = ofMap(arduinoTemparature(), MIN_TEMPARATURE, MAX_TEMPARATURE, 40.0 / 255.0, 170.0 / 255.0);
+    float hue = ofMap(arduinoTemparature(), MIN_TEMPARATURE, MAX_TEMPARATURE, 30.0 / 255.0, 160.0 / 255.0);
     for (int i = 0; i < PARTICLE_NUM; i++) {
         particleColor[i] = ofFloatColor::fromHsb(hue, 1.0, 1.0);
     }

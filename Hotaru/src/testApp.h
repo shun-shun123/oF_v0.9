@@ -1,10 +1,10 @@
 #ifndef _TEST_APP
 #define _TEST_APP
 
-#include "ofxOpenNI.h"
 #include "ofMain.h"
 #include "GenjiHotaru.hpp"
 #include "Environment.hpp"
+#include "ofxBlur.h"
 
 #define HOTARU_NUM 10
 #define STATE 5
@@ -31,6 +31,9 @@ public:
     Environment season;
     ofImage sample;
     bool hoge = false;
+    ofSpherePrimitive sphere;
+    ofFbo fbo;
+    ofxBlur blur;
 };
 
 #endif

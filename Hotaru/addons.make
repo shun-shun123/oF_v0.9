@@ -1,3 +1,1 @@
-ofxKinect
-ofxOpenCv
-ofxOpenNI
+ofxBlur

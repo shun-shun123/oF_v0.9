@@ -26,7 +26,7 @@ Hotaru::Hotaru() {
 
 void Hotaru::update() {
     // sinの合成で上下に少し乱れた動きをする
-    pos.y += sin(yRatio[0] * ofGetElapsedTimeMillis()) * 1.5 + sin(yRatio[1] * ofGetElapsedTimeMillis()) * 1.5 + sin(yRatio[2] * ofGetElapsedTimeMillis());
+    pos.y += sin(yRatio[0] * ofGetFrameNum()) * 1.5 + sin(yRatio[1] * ofGetFrameNum()) * 1.5 + sin(yRatio[2] * ofGetFrameNum());
     pos += vel;
     if (pos.x >= ofGetWidth()) {
         pos.x = 0;
