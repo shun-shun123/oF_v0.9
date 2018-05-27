@@ -2,38 +2,79 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofBackground(255);
-    ofSetBackgroundAuto(false);
+    // 画面基本設定
+    ofSetFrameRate(60);
+    ofBackground(0);
     
+    // メッシュを点で描画
+    mesh.setMode(OF_PRIMITIVE_POINTS);
+    glPointSize(1.0);
     
     for (int i = 0; i < NUM; i++) {
-        myVerts[i] = ofVec2f(ofRandomWidth(), ofRandomHeight());
-        myColors[i] = ofFloatColor::fromHsb(ofRandom(1.0), 1.0, 1.0, 1.0);
-        position[i] = myVerts[i];
-        velocity[i] = ofVec2f(0, 0);
+        Particle p;
+        p.friction = 0.002;
+        p.setup(ofVec2f(ofRandomWidth(), ofRandomHeight()), ofVec2f(0, 0));
+        particles.push_back(p);
     }
-    myVbo.setVertexData(position, NUM, GL_DYNAMIC_DRAW);
-    myVbo.setColorData(myColors, NUM, GL_DYNAMIC_DRAW);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    for (int i = 0; i < NUM; i++) {
-        position[i] += velocity[i];
+    // パーティクルの数だけ計算
+    for (int i = 0; i < particles.size(); i++) {
+        // 力をリセット
+        particles[i].reserForce();
+        // もし引力が働いていたら
+        if (attraction) {
+            // マウスの位置に引力を加える
+            particles[i].addAttractionForce(ofVec2f(mouseX, mouseY), ofGetWidth(), 0.1);
+        }
+        // パーティクル更新
+        particles[i].update();
+        // 画面の端に来たら反対側へ
+        particles[i].throughOfWalls();
     }
-    myVbo.updateVertexData(position, NUM);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofSetColor(0, 100);
-    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
-    myVbo.draw(GL_POINTS, 0, NUM);
+    // メッシュを点で描く
+    mesh.clear();
+    ofSetColor(255);
+    for (int i = 0; i < NUM; i++) {
+        mesh.addVertex(ofVec3f(particles[i].position.x, particles[i].position.y, 0));
+    }
+    mesh.draw();
+    
+    // 重力の点を描く
+    if (attraction) {
+        ofSetColor(255, 0, 0);
+    } else {
+        ofSetColor(0, 255, 255);
+    }
+    ofDrawCircle(mouseX, mouseY, 4);
+    
+    // 文字の背景
+    ofSetColor(0, 127);
+    ofDrawRectangle(0, 0, 200, 60);
+    
+    // ログを表示
+    ofSetColor(255);
+    ofDrawBitmapString("fps = " + ofToString(ofGetFrameRate()), 10, 20);
+    ofDrawBitmapString("Particle num = " + ofToString(particles.size()), 10, 40);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    if (key == 'c') {
+        particles.clear();
+        for (int i = 0; i < NUM; i++) {
+            Particle p;
+            p.friction = 0.002;
+            p.setup(ofVec2f(ofRandomWidth(), ofRandomHeight()), ofVec2f(0, 0));
+            particles.push_back(p);
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -53,17 +94,12 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    ofVec2f mouse = ofVec2f(x, y);
-    for (int i = 0; i < NUM; i++) {
-        velocity[i] = (mouse - myVerts[i]) / 30;
-    }
+    attraction = true;
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-    for (int i = 0; i < NUM; i++) {
-        position[i] = myVerts[i];
-    }
+    attraction = false;
 }
 
 //--------------------------------------------------------------

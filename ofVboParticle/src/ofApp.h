@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Particle.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -21,10 +22,12 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-    static const int NUM = 10000;
-    ofVec2f myVerts[NUM];
-    ofVec2f position[NUM];
-    ofVec2f velocity[NUM];
-    ofFloatColor myColors[NUM];
-    ofVbo myVbo;
+    // パーティクルクラスをインスタンス化
+    vector<Particle> particles;
+    // メッシュ
+    ofVboMesh mesh;
+    // 引力が働いているか
+    bool attraction;
+    // パーティクルの数
+    static const int NUM = 100000;
 };
