@@ -28,6 +28,9 @@ void ofApp::update(){
             case 2:
                 noiseColor(pixels);
                 break;
+            case 3:
+                modifyPixels(pixels);
+                break;
             default:
                 changedPixels = pixels;
                 break;
@@ -68,9 +71,33 @@ void ofApp::noiseColor(unsigned char* pixels) {
             // 赤
             changedPixels[y * 3 * w + x * 3] = pixels[y * 3 * w + x * 3] + ofRandom(-30, -10);
             // 緑
-            changedPixels[y * 3 * w + x * 3 + 1] = pixels[y * 3 * w + x * 3] + ofRandom(-30, -10);
+            changedPixels[y * 3 * w + x * 3 + 1] = pixels[y * 3 * w + x * 3 + 1] + ofRandom(-30, -10);
             // 青
-            changedPixels[y * 3 * w + x * 3 + 2] = pixels[y * 3 * w + x * 3] + ofRandom(-30, -10);
+            changedPixels[y * 3 * w + x * 3 + 2] = pixels[y * 3 * w + x * 3 + 2] + ofRandom(-30, -10);
+        }
+    }
+}
+
+void ofApp::modifyPixels(unsigned char* pixels) {
+    for (int y = 0; y < h; y++) {
+        for (int x = 0; x < w; x++) {
+            int random = int(ofRandom(x));
+            int noise = 20;
+            if (random <= (x + noise) && random >= (x - noise)) {
+                changedPixels[y * 3 * w + x * 3] = 0;
+                changedPixels[y * 3 * w + x * 3 + 1] = 0;
+                changedPixels[y * 3 * w + x * 3 + 2] = 0;
+                continue;
+            }
+            // red
+//            changedPixels[y * 3 * w + x * 3] = pixels[(w * h * 3) - (y * 3 * w + x * 3)];
+//            // green
+//            changedPixels[y * 3 * w + x * 3 + 1] = pixels[(w * h * 3) - (y * 3 * w + x * 3 + 1)];
+//            // blue
+//            changedPixels[y * 3 * w + x * 3 + 2] = pixels[(w * h * 3) - (y * 3 * w + x * 3 + 2)];
+            changedPixels[y * 3 * w + x * 3] = pixels[y * 3 * w + x * 3];
+            changedPixels[y * 3 * w + x * 3 + 1] = pixels[y * 3 * w + x * 3 + 1];
+            changedPixels[y * 3 * w + x * 3 + 2] = pixels[y * 3 * w + x * 3 + 2];
         }
     }
 }
@@ -86,6 +113,9 @@ void ofApp::keyPressed(int key){
             break;
         case '2':
             state = 2;
+            break;
+        case '3':
+            state = 3;
             break;
     }
     cout << state << endl;

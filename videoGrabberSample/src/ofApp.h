@@ -23,6 +23,7 @@ class ofApp : public ofBaseApp{
     
         void reverseColor(unsigned char* pixels);
         void noiseColor(unsigned char* pixels);
+        void modifyPixels(unsigned char* pixels);
     
     ofVideoGrabber video;
     int w, h;
