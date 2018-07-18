@@ -22,7 +22,7 @@ void Particle::setup(ofVec2f _position, ofVec2f _velocity) {
 }
 
 // 力をリセット
-void Particle::reserForce() {
+void Particle::resetForce() {
     force.set(0, 0);
 }
 

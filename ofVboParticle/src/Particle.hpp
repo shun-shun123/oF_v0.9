@@ -19,7 +19,7 @@ class Particle {
         // 初期設定
         void setup(ofVec2f _position, ofVec2f _velocity);
         // 力をリセット
-        void reserForce();
+        void resetForce();
         // 力を加える
         void addForce(ofVec2f _force);
         // 力を更新
