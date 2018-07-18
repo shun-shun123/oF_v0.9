@@ -58,10 +58,12 @@ void ofApp::draw(){
         ofRotateZ(90);
     }
     ofPopMatrix();
-
-    gui.draw();
-    ofSetColor(255);
-    ofDrawBitmapString(ofGetFrameRate(), 10, 60);
+    
+    if (mode == 0) {
+        gui.draw();
+        ofSetColor(255);
+        ofDrawBitmapString(ofGetFrameRate(), 10, 60);
+    }
 }
 
 //--------------------------------------------------------------
